@@ -6,21 +6,27 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   NavigatorIOS
 } from 'react-native';
 
-var Dashboard = require('../smart_refrigerator/js/dashboard');
+var Navigator = require('../js/navigator');
 
-class smartRefrigerator extends Component {
+class Dashboard extends Component {
   render() {
     return (
-      <Dashboard />
+      <Navigator />
     );
   }
 }
 
-AppRegistry.registerComponent('smart_refrigerator', () => smartRefrigerator);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+});
+
+
+module.exports = Dashboard;

@@ -6,6 +6,7 @@ var BackAndroid = require('BackAndroid');
 
 var Menulist = require('../js/common/menulist');
 var LoginFormView = require('../js/components/login');
+var CameraView = require('../js/components/camera');
 
 var Navigator = require('Navigator');
 var StyleSheet = require('StyleSheet');
@@ -84,7 +85,8 @@ var _Navigator = React.createClass({
       );
     }
 
-    return <LoginFormView navigator={navigator}/>;
+    // return <LoginFormView navigator={navigator}/>;
+    return <CameraView title='camera' navigator={navigator} />
 
   },
 });

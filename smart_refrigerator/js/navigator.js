@@ -6,7 +6,9 @@ var BackAndroid = require('BackAndroid');
 
 var Menulist = require('../js/common/menulist');
 var LoginFormView = require('../js/components/login');
+
 var CameraView = require('../js/components/camera');
+var ItemFormView = require('../js/components/itemform');
 
 var Navigator = require('Navigator');
 var StyleSheet = require('StyleSheet');
@@ -80,6 +82,15 @@ var _Navigator = React.createClass({
       return (
         <Menulist
           user={route.user}
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.itemform) {
+      return (
+        <ItemFormView
+          data={route.data}
           navigator={navigator}
         />
       );

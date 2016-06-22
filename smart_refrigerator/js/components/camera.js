@@ -58,7 +58,7 @@ export default class CameraView extends React.Component {
     this.state = {
       camera: {
         aspect: Camera.constants.Aspect.fill,
-        captureTarget: Camera.constants.CaptureTarget.cameraRoll,
+        captureTarget: Camera.constants.CaptureTarget.disk,
         type: Camera.constants.Type.back,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
@@ -73,7 +73,12 @@ export default class CameraView extends React.Component {
   takePicture() {
     if (this.camera) {
       this.camera.capture()
-        .then((data) => console.log(data))
+        .then((data) =>
+          this.props.navigator.push({
+            itemform: true,
+            data: data
+          })
+        )
         .catch(err => console.error(err));
     }
   }

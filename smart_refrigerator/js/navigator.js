@@ -8,6 +8,7 @@ var Menulist = require('../js/common/menulist');
 var LoginFormView = require('../js/components/login');
 
 var CameraView = require('../js/components/camera');
+var ItemsContainerView = require('../js/components/items');
 var ItemFormView = require('../js/components/itemform');
 
 var Navigator = require('Navigator');
@@ -78,10 +79,28 @@ var _Navigator = React.createClass({
   },
 
   renderScene: function(route, navigator) {
-    if (route.items) {
+    console.log(route)
+    if (route.home) {
       return (
         <Menulist
+          title='Smart refrigerator'
           user={route.user}
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.camera) {
+      return (
+        <CameraView title='camera'
+            navigator={navigator} />
+      );
+    }
+
+    if (route.items) {
+      return (
+        <ItemsContainerView
+          title='Item List'
           navigator={navigator}
         />
       );
@@ -96,9 +115,7 @@ var _Navigator = React.createClass({
       );
     }
 
-    // return <LoginFormView navigator={navigator}/>;
-    return <CameraView title='camera' navigator={navigator} />
-
+    return <LoginFormView navigator={navigator}/>;
   },
 });
 

@@ -7,9 +7,13 @@ var BackAndroid = require('BackAndroid');
 var Menulist = require('../js/common/menulist');
 var LoginFormView = require('../js/components/login');
 
-var CameraView = require('../js/components/camera');
 var ItemsContainerView = require('../js/components/items');
 var ItemFormView = require('../js/components/itemform');
+
+var FriendListContainerView = require('../js/components/friends');
+var CameraView = require('../js/components/camera');
+var NotificationListContainerView = require('../js/components/notifications');
+var ProfileView = require('../js/components/profile');
 
 var Navigator = require('Navigator');
 var StyleSheet = require('StyleSheet');
@@ -101,6 +105,33 @@ var _Navigator = React.createClass({
       return (
         <ItemsContainerView
           title='Item List'
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.friends) {
+      return (
+        <FriendListContainerView
+          title='Friend List'
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.notifications) {
+      return (
+        <NotificationListContainerView
+          title='Notification List'
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.profile) {
+      return (
+        <ProfileView
+          title='Profile'
           navigator={navigator}
         />
       );

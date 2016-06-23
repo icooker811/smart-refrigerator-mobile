@@ -12,7 +12,7 @@ import {
 var Header = require('../common/header');
 var SGListView = require('react-native-sglistview');
 
-class ItemListContainerView extends Component {
+class NotificationListContainerView extends Component {
 
   errorCB(err) {
     console.log("SQL Error: " + err);
@@ -110,4 +110,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = ItemListContainerView;
+module.exports = NotificationListContainerView;

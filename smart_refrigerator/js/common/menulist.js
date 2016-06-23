@@ -52,24 +52,77 @@ var TabBarExample = React.createClass({
   render: function() {
     var navigator = this.props.navigator;
     return (
-      <View style={styles.container}>
-        <Header
-          title={this.props.title}
-          style={styles.header}
-        />
-        <View style={styles.content}>
-          <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'add-item')} underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>เพิ่มของ</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'item-list')} underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>รายการของ</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'logout')} underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>ออกจากระบบ</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
-
+         Platform.OS === 'ios'? (
+          <TabBarIOS
+            unselectedTintColor="#555555"
+            tintColor="white"
+            barTintColor="#47BFBF">
+            <TabBarIOS.Item
+              title="Near by"
+              icon={{uri: base64Icon, scale: 3}}
+              selected={this.state.selectedTab === 'nearByTab'}
+              onPress={() => {
+                this.setState({
+                  selectedTab: 'nearByTab',
+                });
+              }}>
+              <ItemsContainerView title='Item List' navigator={navigator} />
+            </TabBarIOS.Item>
+            <TabBarIOS.Item
+              systemIcon="bookmarks"
+              selected={this.state.selectedTab === 'bookmarkTab'}
+              onPress={() => {
+                this.setState({
+                  selectedTab: 'bookmarkTab',
+                });
+              }}>
+              <Text>bb</Text>
+            </TabBarIOS.Item>
+            <TabBarIOS.Item
+              systemIcon="recents"
+              selected={this.state.selectedTab === 'cameraTab'}
+              onPress={() => {
+                this.props.navigator.push({
+                  camera: true,
+                });
+              }}>
+              <Text>cc</Text>
+            </TabBarIOS.Item>
+            <TabBarIOS.Item
+              systemIcon="recents"
+              selected={this.state.selectedTab === 'clockTab'}
+              onPress={() => {
+                this.setState({
+                  selectedTab: 'clockTab',
+                });
+              }}>
+              <Text>dd</Text>
+            </TabBarIOS.Item>
+            <TabBarIOS.Item
+              systemIcon="more"
+              selected={this.state.selectedTab === 'infoTab'}
+              onPress={() => {
+                this.setState({
+                  selectedTab: 'infoTab',
+                });
+              }}>
+              <Text>ee</Text>
+            </TabBarIOS.Item>
+          </TabBarIOS>) : (
+            <View style={styles.container}>
+                <View style={styles.content}>
+                  <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'add-item')} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>เพิ่มของ</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'item-list')} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>รายการของ</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, 'logout')} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>ออกจากระบบ</Text>
+                  </TouchableHighlight>
+                </View>
+            </View>
+          )
     );
   },
 
@@ -84,14 +137,10 @@ var styles = StyleSheet.create({
     flex: 1
   },
   content: {
-    fontSize: 28,
-    textAlign: 'center',
     margin: 10,
   },
   instructions: {
-    textAlign: 'center',
     color: '#333333',
-    fontSize: 19,
     marginBottom: 5,
   },
   toolbar: {
@@ -99,7 +148,6 @@ var styles = StyleSheet.create({
     backgroundColor: '#e9eaed',
   },
   buttonText: {
-    fontSize: 18,
     color: 'white',
     alignSelf: 'center'
   },

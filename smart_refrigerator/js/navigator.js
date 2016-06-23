@@ -109,6 +109,7 @@ var _Navigator = React.createClass({
     if (route.itemform) {
       return (
         <ItemFormView
+          title='Item'
           data={route.data}
           navigator={navigator}
         />

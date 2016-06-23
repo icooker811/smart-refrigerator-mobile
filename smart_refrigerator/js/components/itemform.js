@@ -12,6 +12,9 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+var Header = require('../common/header');
+import { SegmentedControls } from 'react-native-radio-buttons';
+
 class ItemFormView extends Component {
 
   constructor(props) {
@@ -25,23 +28,55 @@ class ItemFormView extends Component {
 
   }
 
+  setSelectedOption(selectedOption){
+    this.setState({
+      selectedOption
+    });
+  }
+
+  renderOption(option, selected, onSelect, index){
+    var style = selected ? { fontWeight: 'bold'} : {};
+
+    return (
+      <TouchableHighlight onPress={onSelect} key={index}>
+        <Text style={style}>{option}</Text>
+      </TouchableHighlight>
+    );
+  }
+
+  renderContainer(optionNodes){
+    return <View>{optionNodes}</View>;
+  }
+
   render() {
+    var options = [
+      "1 วัน",
+      "3 วัน",
+      "5 วัน"
+    ];
     return (
       <View style={styles.container}>
+        <Header
+          title={this.props.title}
+          style={styles.header}
+        />
         <Image source={{ uri: this.props.data.path }}
                style={styles.image}/>
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>1 วัน</Text>
+
+         <SegmentedControls
+           options={ options }
+           onSelection={ this.setSelectedOption.bind(this) }
+           selectedOption={this.state.selectedOption }
+         />
+
+        { this.state.selectedOption?
+          <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
+        }
+
+        <TouchableHighlight style={styles.footer} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+          <Text style={styles.buttonText}>เพิ่มของ</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>3 วัน</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>5 วัน</Text>
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>7 วัน</Text>
-        </TouchableHighlight>
+
       </View>
     );
   }
@@ -70,6 +105,13 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
+  header: {
+    backgroundColor: '#47BFBF',
+  },
+  footer: {
+    bottom: 0,
+    backgroundColor: '#47BFBF',
+  }
 });
 
 module.exports = ItemFormView;

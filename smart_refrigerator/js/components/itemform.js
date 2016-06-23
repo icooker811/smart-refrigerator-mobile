@@ -24,8 +24,18 @@ class ItemFormView extends Component {
       selectingRow: null,
     };
   }
-  onPress() {
 
+  onBackPress() {
+    this.props.navigator.popToTop();
+    
+  }
+
+  onDonePress() {
+    this.props.navigator.popToTop();
+  }
+
+  onNextPress() {
+    this.props.navigator.pop();
   }
 
   setSelectedOption(selectedOption){
@@ -59,6 +69,14 @@ class ItemFormView extends Component {
         <Header
           title={this.props.title}
           style={styles.header}
+          leftItem={{
+            title: 'Back',
+            onPress: () => this.onBackPress(),
+          }}
+          rightItem={{
+            title: 'Done',
+            onPress: () => this.onDonePress(),
+          }}
         />
         <Image source={{ uri: this.props.data.path }}
                style={styles.image}/>
@@ -73,7 +91,7 @@ class ItemFormView extends Component {
           <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
         }
 
-        <TouchableHighlight style={styles.footer} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+        <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>เพิ่มของ</Text>
         </TouchableHighlight>
 

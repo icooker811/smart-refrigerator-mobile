@@ -38,10 +38,13 @@ class LoginFormView extends Component {
     var value = this.refs.form.getValue();
     if (value !== null && value.username !== null && value.username !== '' &&
         value.password !== null && value.password !== '') {
-      this.props.navigator.push({
+
+      // this.props.navigator.pop();
+      this.props.navigator.resetTo({
         home: true,
         user: value
       });
+
     }
   }
 

@@ -93,7 +93,9 @@ var TabBarExample = React.createClass({
               <FriendListContainerView title='Friend List' navigator={navigator} />
             </TabBarIOS.Item>
             <TabBarIOS.Item
-              systemIcon="featured"
+              title="Camera"
+              icon={require('../assets/ic_camera_front_white.png')}
+              selectedIcon={require('../assets/ic_camera_rear_white.png')}
               selected={this.state.selectedTab === 'cameraTab'}
               onPress={() => {
                 this.props.navigator.push({

@@ -12,7 +12,8 @@ var StyleSheet = require('StyleSheet');
 
 class ProfileView extends Component {
   onPress() {
-      this.props.navigator.push({});
+      this.props.navigator.popToTop();
+      this.props.navigator.resetTo({});
   }
 
   render() {

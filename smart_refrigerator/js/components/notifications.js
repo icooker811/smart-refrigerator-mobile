@@ -32,17 +32,9 @@ class NotificationListContainerView extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       loading: false,
-      dataSource: ds.cloneWithRows(this._genRows({}))
+      dataSize: 0,
+      dataSource: ds.cloneWithRows([])
     };
-  }
-
-  _genRows(pressData: {[key: number]: boolean}): Array<string> {
-    var dataBlob = [];
-    for (var ii = 0; ii < 100; ii++) {
-      var pressedText = pressData[ii] ? ' (pressed)' : '';
-      dataBlob.push('Row ' + ii + pressedText);
-    }
-    return dataBlob;
   }
 
   rowPressed(data) {
@@ -76,9 +68,11 @@ class NotificationListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <SGListView dataSource={this.state.dataSource}
+        ): ( <View>{ this.state.dataSize === 0?
+                    <View><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
+                    <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
-                       automaticallyAdjustContentInsets={true} />)
+                       automaticallyAdjustContentInsets={true} />)}</View>)
         }</View>);
   }
 };

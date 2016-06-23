@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 var Header = require('../common/header');
+var dismissKeyboard = require('react-native-dismiss-keyboard');
+
 var StyleSheet = require('StyleSheet');
 var Form = t.form.Form;
 
@@ -32,6 +34,7 @@ class LoginFormView extends Component {
   }
 
   onPress() {
+    dismissKeyboard()
     var value = this.refs.form.getValue();
     if (value !== null && value.username !== null && value.username !== '' &&
         value.password !== null && value.password !== '') {
@@ -40,7 +43,6 @@ class LoginFormView extends Component {
         user: value
       });
     }
-
   }
 
   render() {

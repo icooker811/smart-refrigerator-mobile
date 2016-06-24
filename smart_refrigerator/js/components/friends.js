@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 var SQLite = require('react-native-sqlite-storage');
 import {
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
@@ -11,38 +12,52 @@ import {
 
 var Header = require('../common/header');
 var SGListView = require('react-native-sglistview');
+var config = require('../config');
+
+var Item = require('../components/item');
 
 class FriendListContainerView extends Component {
 
-  errorCB(err) {
-    console.log("SQL Error: " + err);
-  }
-
-  successCB() {
-    console.log("SQL executed fine");
-  }
-
-  openCB() {
-    console.log("Database OPENED");
-  }
-
   constructor(props) {
     super(props);
-    var self = this;
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       loading: false,
-      dataSource: ds.cloneWithRows(this._genRows({}))
+      dataSize: 0,
+      dataSource: null
     };
   }
 
-  _genRows(pressData: {[key: number]: boolean}): Array<string> {
-    var dataBlob = [];
-    for (var ii = 0; ii < 100; ii++) {
-      var pressedText = pressData[ii] ? ' (pressed)' : '';
-      dataBlob.push('Row ' + ii + pressedText);
-    }
-    return dataBlob;
+  init() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      if (result !== null) {
+        console.log(result)
+
+        fetch(config.development.friend_url, {
+          method: 'GET',
+          headers: {
+            'Authorization': result,
+          }
+        }).then((response) => response.json())
+          .then((responseData) => {
+            var items = [];
+            responseData.forEach(function(item) {
+              items.push(item);
+            });
+
+            this.setState({
+              dataSize: items.length,
+              dataSource: ds.cloneWithRows(items),
+            });
+          })
+          .catch((error) => {})
+          .done();
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.init();
   }
 
   rowPressed(data) {
@@ -51,17 +66,7 @@ class FriendListContainerView extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData)}
-                          underlayColor='#dddddd'>
-        <View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              {rowData}
-            </Text>
-          </View>
-          <View style={styles.separator}/>
-        </View>
-      </TouchableHighlight>
+      <Item rowData={rowData} rowPressed={this.rowPressed()}/>
     );
   }
 
@@ -76,11 +81,14 @@ class FriendListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <SGListView dataSource={this.state.dataSource}
+        ): ( <View>{ this.state.dataSize === 0?
+                    <View><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
+                    <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
-                       automaticallyAdjustContentInsets={true} />)
+                       automaticallyAdjustContentInsets={true} />)}</View>)
         }</View>);
   }
+
 };
 
 var styles = StyleSheet.create({

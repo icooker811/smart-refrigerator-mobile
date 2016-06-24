@@ -1,40 +1,65 @@
 import React, { Component } from 'react';
 var SQLite = require('react-native-sqlite-storage');
 import {
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 var Header = require('../common/header');
+var Item = require('../components/item');
 var SGListView = require('react-native-sglistview');
+var config = require('../config');
 
 class ItemListContainerView extends Component {
 
-  errorCB(err) {
-    console.log("SQL Error: " + err);
-  }
-
-  successCB() {
-    console.log("SQL executed fine");
-  }
-
-  openCB() {
-    console.log("Database OPENED");
-  }
 
   constructor(props) {
     super(props);
     var self = this;
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       loading: false,
       dataSize: 0,
-      dataSource: ds.cloneWithRows([])
+      dataSource: null
     };
+  }
+
+  init() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      if (result !== null) {
+        console.log(result)
+
+        fetch(config.development.item_url, {
+          method: 'GET',
+          headers: {
+            'Authorization': result,
+          }
+        }).then((response) => response.json())
+          .then((responseData) => {
+            var items = [];
+            responseData.forEach(function(item) {
+              items.push(item);
+            });
+
+            this.setState({
+              dataSize: items.length,
+              dataSource: ds.cloneWithRows(items),
+            });
+          })
+          .catch((error) => {})
+          .done();
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.init();
   }
 
   rowPressed(data) {
@@ -43,17 +68,7 @@ class ItemListContainerView extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData)}
-                          underlayColor='#dddddd'>
-        <View>
-          <View style={styles.rowContainer}>
-            <Text style={styles.text}>
-              {rowData}
-            </Text>
-          </View>
-          <View style={styles.separator}/>
-        </View>
-      </TouchableHighlight>
+      <Item rowData={rowData} rowPressed={this.rowPressed()}/>
     );
   }
 
@@ -101,7 +116,11 @@ var styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#47BFBF',
-  }
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
 });
 
 module.exports = ItemListContainerView;

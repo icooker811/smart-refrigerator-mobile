@@ -5,6 +5,7 @@ import {
   AsyncStorage,
   Text,
   View,
+  Image,
   TouchableHighlight,
 } from 'react-native';
 
@@ -64,6 +65,12 @@ class ProfileView extends Component {
             title={this.props.title}
             style={styles.header}
           />
+          {this.state.avatar_url?
+            <Image
+              style={styles.thumbnail}
+              source={{uri: this.state.avatar_url}}
+            />
+          : <View></View>}
           <Text style={styles.title}>{this.state.display_name}</Text>
           <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>ออกจากระบบ</Text>
@@ -102,7 +109,11 @@ var styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#47BFBF',
-  }
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
 });
 
 module.exports = ProfileView;

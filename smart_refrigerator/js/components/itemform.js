@@ -5,6 +5,7 @@ var Dimensions = require('Dimensions');
 var {width, height} = Dimensions.get('window');
 
 import {
+  Alert,
   StyleSheet,
   View,
   Image,
@@ -27,7 +28,7 @@ class ItemFormView extends Component {
 
   onBackPress() {
     this.props.navigator.popToTop();
-    
+
   }
 
   onDonePress() {
@@ -35,7 +36,11 @@ class ItemFormView extends Component {
   }
 
   onNextPress() {
-    this.props.navigator.pop();
+    if (typeof(this.state.selectedOption) === 'undefined') {
+      Alert.alert('จำเป็น', 'คุณยังไม่ได้กรอกเวลาหมดอายุ', [{text: 'OK'}]);
+    } else {
+      this.props.navigator.pop();
+    }
   }
 
   setSelectedOption(selectedOption){

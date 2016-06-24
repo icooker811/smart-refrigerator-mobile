@@ -2,7 +2,11 @@
 
 import React, { Component } from 'react';
 var t = require('tcomb-form-native');
+var config = require('../config');
+
 import {
+  Alert,
+  AsyncStorage,
   Text,
   View,
   TouchableHighlight,
@@ -29,8 +33,49 @@ var options = {
 
 class LoginFormView extends Component {
 
+  init() {
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      console.log(result);
+      if (result !== null) {
+        this.props.navigator.resetTo({
+          home: true,
+          user: value
+        });
+      }
+    });
+  }
+
   componentDidMount() {
-      this.refs.form.getComponent('username').refs.input.focus();
+    this.init();
+    this.refs.form.getComponent('username').refs.input.focus();
+  }
+
+  login(username, password) {
+    console.log(username, password);
+
+    fetch(config.development.login_url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      })
+    }).then((response) => response.json())
+      .then((responseData) => {
+        AsyncStorage.setItem('Authorization', 'token ' + responseData.token, () => {
+          this.props.navigator.resetTo({
+            home: true,
+            user: null
+          });
+        });
+      })
+      .catch((error) => {
+        Alert.alert('ผิดพลาด', 'ไม่สามารถเข้าสู่ระบบได้ กรุณาลองใหม่อีกครั้ง', [{text: 'OK'}]);
+      })
+      .done();
   }
 
   onPress() {
@@ -38,13 +83,7 @@ class LoginFormView extends Component {
     var value = this.refs.form.getValue();
     if (value !== null && value.username !== null && value.username !== '' &&
         value.password !== null && value.password !== '') {
-
-      // this.props.navigator.pop();
-      this.props.navigator.resetTo({
-        home: true,
-        user: value
-      });
-
+          this.login(value.username, value.password);
     }
   }
 

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   Text,
   View,
   TouchableHighlight,
@@ -12,8 +13,10 @@ var StyleSheet = require('StyleSheet');
 
 class ProfileView extends Component {
   onPress() {
-      this.props.navigator.popToTop();
-      this.props.navigator.resetTo({});
+    var keys = ['Authorization'];
+    AsyncStorage.multiRemove(keys, (err) => {});
+    this.props.navigator.popToTop();
+    this.props.navigator.resetTo({});
   }
 
   render() {

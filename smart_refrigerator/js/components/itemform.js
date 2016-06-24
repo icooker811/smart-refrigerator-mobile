@@ -28,11 +28,22 @@ class ItemFormView extends Component {
 
   onBackPress() {
     this.props.navigator.popToTop();
-
+    this.props.navigator.resetTo({
+      home: true,
+      user: null
+    });
   }
 
   onDonePress() {
-    this.props.navigator.popToTop();
+    if (typeof(this.state.selectedOption) === 'undefined') {
+      Alert.alert('จำเป็น', 'คุณยังไม่ได้กรอกเวลาหมดอายุ', [{text: 'OK'}]);
+    } else {
+      this.props.navigator.popToTop();
+      this.props.navigator.resetTo({
+        home: true,
+        user: null
+      });
+    }
   }
 
   onNextPress() {

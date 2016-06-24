@@ -65,12 +65,18 @@ class LoginFormView extends Component {
       })
     }).then((response) => response.json())
       .then((responseData) => {
+        if (typeof(responseData.token) === 'undefined') {
+          Alert.alert('ผิดพลาด', 'คุณกรอกชื่อผู้ใช้หรือรหัสผ่านผิดพลาด กรุณาลองใหม่อีกครั้ง', [{text: 'OK'}]);
+          return;
+        }
+
         AsyncStorage.setItem('Authorization', 'token ' + responseData.token, () => {
           this.props.navigator.resetTo({
             home: true,
             user: null
           });
         });
+
       })
       .catch((error) => {
         Alert.alert('ผิดพลาด', 'ไม่สามารถเข้าสู่ระบบได้ กรุณาลองใหม่อีกครั้ง', [{text: 'OK'}]);

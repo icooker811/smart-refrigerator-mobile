@@ -10,8 +10,46 @@ import {
 
 var Header = require('../common/header');
 var StyleSheet = require('StyleSheet');
+var config = require('../config');
 
 class ProfileView extends Component {
+
+  constructor(props) {
+    super(props);;
+    this.state = {
+      display_name: '',
+      avatar_url: '',
+    };
+  }
+
+  init() {
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      if (result !== null) {
+        console.log(result)
+
+        fetch(config.development.profile_url, {
+          method: 'GET',
+          headers: {
+            'Authorization': result,
+          }
+        }).then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData)
+            this.setState({
+              display_name: responseData.display_name,
+              avatar_url: responseData.avatar_url
+            });
+          })
+          .catch((error) => {})
+          .done();
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.init();
+  }
+
   onPress() {
     var keys = ['Authorization'];
     AsyncStorage.multiRemove(keys, (err) => {});
@@ -26,8 +64,7 @@ class ProfileView extends Component {
             title={this.props.title}
             style={styles.header}
           />
-          <Text style={styles.title}>Who am I</Text>
-
+          <Text style={styles.title}>{this.state.display_name}</Text>
           <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
             <Text style={styles.buttonText}>ออกจากระบบ</Text>
           </TouchableHighlight>

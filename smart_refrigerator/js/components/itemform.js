@@ -5,6 +5,7 @@ var Dimensions = require('Dimensions');
 var {width, height} = Dimensions.get('window');
 
 import {
+  AsyncStorage,
   Alert,
   StyleSheet,
   View,
@@ -14,6 +15,8 @@ import {
 } from 'react-native';
 
 var Header = require('../common/header');
+var config = require('../config');
+
 import { SegmentedControls } from 'react-native-radio-buttons';
 
 class ItemFormView extends Component {
@@ -24,6 +27,41 @@ class ItemFormView extends Component {
       selectingSectionKey: null,
       selectingRow: null,
     };
+  }
+
+  postData (goTo) {
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      if (result !== null) {
+        let data = new FormData()
+        data.append('refrigerator', 1)
+        data.append('expire_next', this.state.selectedOption.replace('วัน', ''))
+        data.append('image', {uri: this.props.data.path, name: 'image.jpg', type: 'image/jpg'})
+        const params = {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data; boundary=6ff46e0b6b5148d984f148b6542e5a5d',
+            'Authorization': result,
+          },
+          body: data,
+        }
+        return fetch(config.development.item_url, params)
+          .then((response) => response.json())
+          .then((responseData) => {
+            if (goTo === 'Done') {
+              this.props.navigator.popToTop();
+              this.props.navigator.resetTo({
+                home: true,
+                user: null
+              });
+            } else {
+              this.props.navigator.pop();
+            }
+          })
+          .catch((error) => {})
+          .done();
+        }
+    });
   }
 
   onBackPress() {
@@ -38,11 +76,7 @@ class ItemFormView extends Component {
     if (typeof(this.state.selectedOption) === 'undefined') {
       Alert.alert('จำเป็น', 'คุณยังไม่ได้กรอกเวลาหมดอายุ', [{text: 'OK'}]);
     } else {
-      this.props.navigator.popToTop();
-      this.props.navigator.resetTo({
-        home: true,
-        user: null
-      });
+      this.postData('Done');
     }
   }
 
@@ -50,7 +84,7 @@ class ItemFormView extends Component {
     if (typeof(this.state.selectedOption) === 'undefined') {
       Alert.alert('จำเป็น', 'คุณยังไม่ได้กรอกเวลาหมดอายุ', [{text: 'OK'}]);
     } else {
-      this.props.navigator.pop();
+      this.postData('Next');
     }
   }
 

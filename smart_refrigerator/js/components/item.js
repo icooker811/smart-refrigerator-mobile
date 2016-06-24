@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
@@ -10,7 +11,7 @@ import {
 
 class ItemView extends Component {
   rowPressed(data) {
-
+    this.props.rowPressed(data);
   }
 
   render() {

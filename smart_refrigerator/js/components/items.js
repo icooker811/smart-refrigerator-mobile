@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 var SQLite = require('react-native-sqlite-storage');
 import {
   AsyncStorage,
+  Alert,
   StyleSheet,
   Text,
   View,
@@ -50,6 +51,7 @@ class ItemListContainerView extends Component {
             this.setState({
               dataSize: items.length,
               dataSource: ds.cloneWithRows(items),
+              token: result
             });
           })
           .catch((error) => {})
@@ -62,13 +64,36 @@ class ItemListContainerView extends Component {
     this.init();
   }
 
-  rowPressed(data) {
+  liftOff(data) {
+    fetch(config.development.friend_url + data.id + '/lift_off/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
 
+  rowPressed(data) {
+    if (data) {
+      Alert.alert(
+        'คุณได้ทำการเอาออกจากตู้เย็นแล้ว?',
+        '',
+        [
+          {text: 'ไม่'},
+          {text: 'ใช่', onPress: () => this.liftOff(data)},
+        ]
+      );
+    }
   }
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <Item rowData={rowData} rowPressed={this.rowPressed()}/>
+      <Item rowData={rowData} rowPressed={this.rowPressed.bind(this)}/>
     );
   }
 

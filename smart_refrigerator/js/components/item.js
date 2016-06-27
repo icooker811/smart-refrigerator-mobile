@@ -18,17 +18,17 @@ class ItemView extends Component {
     var rowData = this.props.rowData;
     return (
       <TouchableHighlight onPress={() => this.rowPressed(rowData)}
-                          underlayColor='#dddddd'>
+                          underlayColor='#dddddd' style={styles.item}>
         <View>
           <View style={styles.rowContainer}>
             <Image
               style={styles.thumbnail}
               source={{uri: rowData.image}}
             />
-            <Text style={styles.text}>
-              {rowData.created_by.display_name} | {rowData.expire_at}
-            </Text>
           </View>
+          <Text style={styles.text}>
+            {rowData.created_by.display_name} | {rowData.expire_at}
+          </Text>
           <View style={styles.separator}/>
         </View>
       </TouchableHighlight>
@@ -62,9 +62,14 @@ var styles = StyleSheet.create({
     backgroundColor: '#47BFBF',
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 120,
+    height: 120,
   },
+  item: {
+    margin: 10,
+    width: 150,
+    height: 150
+  }
 });
 
 module.exports = ItemView;

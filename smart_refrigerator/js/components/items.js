@@ -24,7 +24,7 @@ class ItemListContainerView extends Component {
     super(props);
     var self = this;
     this.state = {
-      loading: false,
+      loading: true,
       dataSize: 0,
       dataSource: null
     };
@@ -52,7 +52,7 @@ class ItemListContainerView extends Component {
               dataSize: items.length,
               dataSource: ds.cloneWithRows(items),
               token: result,
-              loading: true,
+              loading: false,
             });
           })
           .catch((error) => {})
@@ -113,6 +113,7 @@ class ItemListContainerView extends Component {
                     <View><Text style={styles.title}>คลิกเพิ่มของ</Text></View>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
+                       contentContainerStyle={styles.list}
                        automaticallyAdjustContentInsets={true} />)}</View>)
         }</View>);
   }
@@ -120,7 +121,7 @@ class ItemListContainerView extends Component {
 
 var styles = StyleSheet.create({
   separator: {
-    height: 1,
+    height: 0,
     backgroundColor: '#dddddd'
   },
   title: {
@@ -146,6 +147,10 @@ var styles = StyleSheet.create({
   thumbnail: {
     width: 53,
     height: 81,
+  },
+  list: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   },
 });
 

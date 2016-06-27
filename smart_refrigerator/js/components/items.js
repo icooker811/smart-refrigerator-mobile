@@ -58,7 +58,11 @@ class ItemListContainerView extends Component {
               loading: false,
             });
           })
-          .catch((error) => {})
+          .catch((error) => {
+            this.setState({
+              loading: false,
+            });
+          })
           .done();
       }
     });
@@ -82,10 +86,38 @@ class ItemListContainerView extends Component {
       .done();
   }
 
-  rowPressed(data) {
+  shareNow(data) {
+    fetch(config.development.item_url + data.id + '/share_now/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
+
+  rowSharePressed(data) {
     if (data) {
       Alert.alert(
-        'คุณได้ทำการเอาออกจากตู้เย็นแล้ว?',
+        'คุณต้องการแชร์ของให้เพื่อน?',
+        '',
+        [
+          {text: 'ไม่'},
+          {text: 'ใช่', onPress: () => this.shareNow(data)},
+        ]
+      );
+    }
+  }
+
+
+  rowCancelPressed(data) {
+    if (data) {
+      Alert.alert(
+        'กินแล้ว?',
         '',
         [
           {text: 'ไม่'},
@@ -97,7 +129,11 @@ class ItemListContainerView extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <Item rowData={rowData} rowPressed={this.rowPressed.bind(this)}/>
+      <Item rowData={rowData}
+            cancelText='กินแล้ว'
+            actionText='แชร์'
+            rowActionPressed={this.rowSharePressed.bind(this)}
+            rowCancelPressed={this.rowCancelPressed.bind(this)}/>
     );
   }
 

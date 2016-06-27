@@ -88,14 +88,30 @@ class FriendItemListContainerView extends Component {
       .done();
   }
 
+
+  getFromFriend(data) {
+    fetch(config.development.item_url + data.id + '/get_from_friend/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
+
+
   rowPressed(data) {
     if (data) {
       Alert.alert(
-        'คุณได้ทำการเอาออกจากตู้เย็นแล้ว?',
+        'กินแล้ว?',
         '',
         [
           {text: 'ไม่'},
-          {text: 'ใช่', onPress: () => this.liftOff(data)},
+          {text: 'ใช่', onPress: () => this.getFromFriend(data)},
         ]
       );
     }
@@ -103,7 +119,11 @@ class FriendItemListContainerView extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <Item rowData={rowData} rowPressed={this.rowPressed.bind(this)}/>
+      <Item rowData={rowData}
+            cancelText='กินแล้ว'
+            actionText='กินแล้ว'
+            rowActionPressed={this.rowPressed.bind(this)}
+            rowCancelPressed={this.rowPressed.bind(this)}/>
     );
   }
 

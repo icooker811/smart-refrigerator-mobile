@@ -18,28 +18,42 @@ require('moment/locale/th');
 moment.locale('th');
 
 class ItemView extends Component {
-  rowPressed(data) {
-    this.props.rowPressed(data);
+  rowCancelPressed(data) {
+    this.props.rowCancelPressed(data);
+  }
+
+  rowActionPressed(data) {
+    this.props.rowActionPressed(data);
   }
 
   render() {
     var rowData = this.props.rowData;
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData)}
-                          underlayColor='#dddddd' style={styles.item}>
-        <View>
-          <View style={styles.rowContainer}>
-            <Image
-              style={styles.thumbnail}
-              source={{uri: rowData.image}}
-            />
+      <View>
+        <TouchableHighlight onPress={() => this.rowCancelPressed(rowData)}
+                            underlayColor='#dddddd'>
+          <View>
+            <Text style={styles.cancelText}>
+              {this.props.cancelText}
+            </Text>
           </View>
-          <Text style={styles.text}>
-            {rowData.created_by.display_name}
-          </Text>
-          <TimeAgo time={rowData.expire_at} />
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => this.rowActionPressed(rowData)}
+                            underlayColor='#dddddd' style={styles.item}>
+          <View>
+            <View style={styles.rowContainer}>
+              <Image
+                style={styles.thumbnail}
+                source={{uri: rowData.image}}
+              />
+            </View>
+            <Text style={styles.text}>
+              {rowData.created_by.display_name}
+            </Text>
+            <TimeAgo time={rowData.expire_at} />
+          </View>
+        </TouchableHighlight>
+      </View>
     );
   }
 };
@@ -77,6 +91,9 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 10,
     width: (window.width / 2) - 30
+  },
+  cancelText: {
+    right: 0
   }
 });
 

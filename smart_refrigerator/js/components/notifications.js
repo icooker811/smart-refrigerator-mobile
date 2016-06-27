@@ -1,55 +1,131 @@
 import React, { Component } from 'react';
 var SQLite = require('react-native-sqlite-storage');
 import {
+  Alert,
+  AsyncStorage,
   StyleSheet,
   Text,
   View,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 var Header = require('../common/header');
 var SGListView = require('react-native-sglistview');
+var config = require('../config');
+
+var Item = require('../components/item');
+var TimeAgo = require('react-native-timeago');
+var moment = require('moment');
+require('moment/locale/th');
+moment.locale('th');
 
 class NotificationListContainerView extends Component {
 
-  errorCB(err) {
-    console.log("SQL Error: " + err);
-  }
-
-  successCB() {
-    console.log("SQL executed fine");
-  }
-
-  openCB() {
-    console.log("Database OPENED");
-  }
-
   constructor(props) {
     super(props);
-    var self = this;
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      loading: false,
+      loading: true,
       dataSize: 0,
-      dataSource: ds.cloneWithRows([])
+      dataSource: null
     };
   }
 
-  rowPressed(data) {
+  init() {
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var value = AsyncStorage.getItem('Authorization', (err, result) => {
+      if (result !== null) {
+        fetch(config.development.notification_url, {
+          method: 'GET',
+          headers: {
+            'Authorization': result,
+          }
+        }).then((response) => response.json())
+          .then((responseData) => {
+            var items = [];
+            responseData.forEach(function(item) {
+              items.push(item);
+            });
 
+            this.setState({
+              dataSize: items.length,
+              dataSource: ds.cloneWithRows(items),
+              token: result,
+              loading: false,
+            });
+          })
+          .catch((error) => {
+            this.setState({
+              loading: false,
+            });
+          })
+          .done();
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.init();
+  }
+
+  changeOwner(data) {
+    fetch(config.development.item_url + data.id + '/change_owner/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData)
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
+
+  onPress(data) {
+    if (data) {
+      Alert.alert(
+        'ต้องการของสิ่งนี้?',
+        '',
+        [
+          {text: 'ไม่'},
+          {text: 'ใช่', onPress: () => this.changeOwner(data.item)},
+        ]
+      );
+    }
   }
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <TouchableHighlight onPress={() => this.rowPressed(rowData)}
-                          underlayColor='#dddddd'>
+      <TouchableHighlight underlayColor='#dddddd'>
         <View>
           <View style={styles.rowContainer}>
+            <Image
+              style={styles.thumbnail}
+              source={{uri: rowData.item.image}}
+            />
             <Text style={styles.text}>
-              {rowData}
+              {rowData.message} |
             </Text>
+
+            <Text style={styles.text}>
+              {rowData.send_user.display_name} |
+            </Text>
+
+            {
+              rowData.notification_type === 'SHARE_NOW'? (
+                <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, rowData)} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>ขอนะ</Text>
+                </TouchableHighlight>
+              ): (<View></View>)
+
+            }
+
+            <TimeAgo time={rowData.created_at} />
+
           </View>
           <View style={styles.separator}/>
         </View>
@@ -68,13 +144,14 @@ class NotificationListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <View>{ this.state.dataSize === 0?
-                    <View><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
+        ): ( <View style={styles.content}>{ this.state.dataSize === 0?
+                    <View style={styles.container}><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
                        automaticallyAdjustContentInsets={true} />)}</View>)
         }</View>);
   }
+
 };
 
 var styles = StyleSheet.create({
@@ -101,7 +178,26 @@ var styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#47BFBF',
-  }
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#48BBEC',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
 });
 
 module.exports = NotificationListContainerView;

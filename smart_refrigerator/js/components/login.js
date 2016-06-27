@@ -155,11 +155,6 @@ var styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center'
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
   button: {
     height: 36,
     backgroundColor: '#48BBEC',

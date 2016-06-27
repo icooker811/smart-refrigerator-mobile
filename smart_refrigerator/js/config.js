@@ -5,6 +5,7 @@ var config = {
     "my_item_url": "https://smart-refrigerator-server.herokuapp.com/items/?me=true",
     "item_url": "https://smart-refrigerator-server.herokuapp.com/items/",
     "friend_url": "https://smart-refrigerator-server.herokuapp.com/refrigerators/1/users/",
+    "notification_url": "https://smart-refrigerator-server.herokuapp.com/notifications/",
     "profile_url": "https://smart-refrigerator-server.herokuapp.com/me/",
   },
 }

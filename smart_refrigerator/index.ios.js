@@ -10,7 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
-  NavigatorIOS
+  NavigatorIOS,
+  DeviceEventEmitter
 } from 'react-native';
 
 var Dashboard = require('../smart_refrigerator/js/dashboard');
@@ -20,7 +21,7 @@ class smartRefrigerator extends Component {
   componentDidMount() {
         SplashScreen.hide();
   }
-  
+
   render() {
     return (
       <Dashboard />

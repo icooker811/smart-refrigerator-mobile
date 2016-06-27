@@ -8,7 +8,8 @@ import {
   View,
   TouchableHighlight,
   RecyclerViewBackedScrollView,
-  ListView
+  ListView,
+  Image
 } from 'react-native';
 
 var Header = require('../common/header');
@@ -22,7 +23,7 @@ class FriendListContainerView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
+      loading: true,
       dataSize: 0,
       dataSource: null
     };
@@ -32,8 +33,6 @@ class FriendListContainerView extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var value = AsyncStorage.getItem('Authorization', (err, result) => {
       if (result !== null) {
-        console.log(result)
-
         fetch(config.development.friend_url, {
           method: 'GET',
           headers: {
@@ -49,10 +48,15 @@ class FriendListContainerView extends Component {
             this.setState({
               dataSize: items.length,
               dataSource: ds.cloneWithRows(items),
-              token: result
+              token: result,
+              loading: false,
             });
           })
-          .catch((error) => {})
+          .catch((error) => {
+            this.setState({
+              loading: false,
+            });
+          })
           .done();
       }
     });
@@ -63,7 +67,7 @@ class FriendListContainerView extends Component {
   }
 
   liftOff(data) {
-    fetch(config.development.friend_url + data.id + '/lift_off/', {
+    fetch(config.development.item_url + data.id + '/lift_off/', {
       method: 'POST',
       headers: {
         'Authorization': this.state.token,
@@ -77,21 +81,29 @@ class FriendListContainerView extends Component {
   }
 
   rowPressed(data) {
-    if (data) {
-      Alert.alert(
-        'คุณได้ทำการเอาออกจากตู้เย็นแล้ว?',
-        '',
-        [
-          {text: 'ไม่'},
-          {text: 'ใช่', onPress: () => this.liftOff(data)},
-        ]
-      );
-    }
+    this.props.navigator.push({
+      friend_items: true,
+      created_by: data,
+    });
   }
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <Item rowData={rowData} rowPressed={this.rowPressed.bind(this)}/>
+      <TouchableHighlight onPress={() => this.rowPressed(rowData)}
+                          underlayColor='#dddddd'>
+        <View>
+          <View style={styles.rowContainer}>
+            <Image
+              style={styles.thumbnail}
+              source={{uri: rowData.avatar_url}}
+            />
+            <Text style={styles.text}>
+              {rowData.display_name}
+            </Text>
+          </View>
+          <View style={styles.separator}/>
+        </View>
+      </TouchableHighlight>
     );
   }
 
@@ -106,8 +118,8 @@ class FriendListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <View style={styles.container}>{ this.state.dataSize === 0?
-                    <View><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
+        ): ( <View style={styles.content}>{ this.state.dataSize === 0?
+                    <View style={styles.container}><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
                        automaticallyAdjustContentInsets={true} />)}</View>)
@@ -140,6 +152,10 @@ var styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#47BFBF',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
   }
 });
 

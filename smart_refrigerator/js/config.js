@@ -4,7 +4,7 @@ var config = {
     "login_url": "https://smart-refrigerator-server.herokuapp.com/api-token-auth/",
     "my_item_url": "https://smart-refrigerator-server.herokuapp.com/items/?me=true",
     "item_url": "https://smart-refrigerator-server.herokuapp.com/items/",
-    "friend_url": "https://smart-refrigerator-server.herokuapp.com/refrigerator/1/users/",
+    "friend_url": "https://smart-refrigerator-server.herokuapp.com/refrigerators/1/users/",
     "profile_url": "https://smart-refrigerator-server.herokuapp.com/me/",
   },
 }

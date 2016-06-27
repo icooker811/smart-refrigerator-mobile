@@ -20,8 +20,7 @@ var config = require('../config');
 
 var window = Dimensions.get('window');
 
-class ItemListContainerView extends Component {
-
+class FriendItemListContainerView extends Component {
 
   constructor(props) {
     super(props);
@@ -37,9 +36,8 @@ class ItemListContainerView extends Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     var value = AsyncStorage.getItem('Authorization', (err, result) => {
       if (result !== null) {
-        console.log(result)
 
-        fetch(config.development.my_item_url, {
+        fetch(config.development.item_url + '?created_by=' + this.props.created_by.id, {
           method: 'GET',
           headers: {
             'Authorization': result,
@@ -58,7 +56,11 @@ class ItemListContainerView extends Component {
               loading: false,
             });
           })
-          .catch((error) => {})
+          .catch((error) => {
+            this.setState({
+              loading: false,
+            });
+          })
           .done();
       }
     });
@@ -66,6 +68,10 @@ class ItemListContainerView extends Component {
 
   componentDidMount() {
     this.init();
+  }
+
+  onBackPress() {
+    this.props.navigator.pop();
   }
 
   liftOff(data) {
@@ -105,15 +111,19 @@ class ItemListContainerView extends Component {
     return (
       <View style={styles.content}>
         <Header
-          title={this.props.title}
+          title={this.props.created_by.display_name}
           style={styles.header}
+          leftItem={{
+            title: 'Back',
+            onPress: () => this.onBackPress(),
+          }}
         />
         {this.state.loading? (
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
         ): ( <View style={styles.container}>{ this.state.dataSize === 0?
-                    <Text style={styles.title}>คลิกเพิ่มของ</Text>: (
+                    <Text style={styles.title}>ไม่พบรายการ</Text>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
                        contentContainerStyle={styles.list}
@@ -158,4 +168,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = ItemListContainerView;
+module.exports = FriendItemListContainerView;

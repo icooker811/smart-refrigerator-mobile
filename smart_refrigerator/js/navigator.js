@@ -11,6 +11,8 @@ var ItemsContainerView = require('../js/components/items');
 var ItemFormView = require('../js/components/itemform');
 
 var FriendListContainerView = require('../js/components/friends');
+var FriendItemListContainerView = require('../js/components/frienditems');
+
 var CameraView = require('../js/components/camera');
 var NotificationListContainerView = require('../js/components/notifications');
 var ProfileView = require('../js/components/profile');
@@ -132,6 +134,16 @@ var _Navigator = React.createClass({
       return (
         <ProfileView
           title='Profile'
+          navigator={navigator}
+        />
+      );
+    }
+
+    if (route.friend_items) {
+      return (
+        <FriendItemListContainerView
+          title='Friend Items'
+          created_by={route.created_by}
           navigator={navigator}
         />
       );

@@ -8,6 +8,10 @@ import {
   Image
 } from 'react-native';
 
+var TimeAgo = require('react-native-timeago');
+var moment = require('moment');
+require('moment/locale/th');
+moment.locale('th');
 
 class ItemView extends Component {
   rowPressed(data) {
@@ -27,9 +31,9 @@ class ItemView extends Component {
             />
           </View>
           <Text style={styles.text}>
-            {rowData.created_by.display_name} | {rowData.expire_at}
+            {rowData.created_by.display_name}
           </Text>
-          <View style={styles.separator}/>
+          <TimeAgo time={rowData.expire_at} />
         </View>
       </TouchableHighlight>
     );
@@ -67,8 +71,7 @@ var styles = StyleSheet.create({
   },
   item: {
     margin: 10,
-    width: 150,
-    height: 150
+    width: 150
   }
 });
 

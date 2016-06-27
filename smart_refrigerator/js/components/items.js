@@ -9,13 +9,16 @@ import {
   TouchableHighlight,
   RecyclerViewBackedScrollView,
   ListView,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
 var Header = require('../common/header');
 var Item = require('../components/item');
 var SGListView = require('react-native-sglistview');
 var config = require('../config');
+
+var window = Dimensions.get('window');
 
 class ItemListContainerView extends Component {
 
@@ -66,7 +69,7 @@ class ItemListContainerView extends Component {
   }
 
   liftOff(data) {
-    fetch(config.development.friend_url + data.id + '/lift_off/', {
+    fetch(config.development.item_url + data.id + '/lift_off/', {
       method: 'POST',
       headers: {
         'Authorization': this.state.token,
@@ -109,8 +112,8 @@ class ItemListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <View>{ this.state.dataSize === 0?
-                    <View><Text style={styles.title}>คลิกเพิ่มของ</Text></View>: (
+        ): ( <View style={styles.container}>{ this.state.dataSize === 0?
+                    <Text style={styles.title}>คลิกเพิ่มของ</Text>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
                        contentContainerStyle={styles.list}
@@ -150,7 +153,8 @@ var styles = StyleSheet.create({
   },
   list: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    width: window.width,
   },
 });
 

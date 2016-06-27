@@ -5,8 +5,12 @@ import {
   Text,
   View,
   TouchableHighlight,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
+
+
+var window = Dimensions.get('window');
 
 var TimeAgo = require('react-native-timeago');
 var moment = require('moment');
@@ -70,8 +74,9 @@ var styles = StyleSheet.create({
     height: 120,
   },
   item: {
+    flexDirection: 'row',
     margin: 10,
-    width: 150
+    width: (window.width / 2) - 30
   }
 });
 

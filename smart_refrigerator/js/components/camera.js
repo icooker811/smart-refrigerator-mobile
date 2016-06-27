@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Text,
 } from 'react-native';
 import Camera from 'react-native-camera';
 
@@ -118,6 +119,19 @@ export default class CameraView extends React.Component {
     return icon;
   }
 
+  get cancelIcon() {
+    let icon;
+    const { back, front } = Camera.constants.Type;
+
+    if (this.state.camera.type === back) {
+      icon = require('../assets/ic_camera_rear_white.png');
+    } else if (this.state.camera.type === front) {
+      icon = require('../assets/ic_camera_front_white.png');
+    }
+
+    return icon;
+  }
+
   switchFlash() {
     let newFlashMode;
     const { auto, on, off } = Camera.constants.FlashMode;
@@ -177,7 +191,7 @@ export default class CameraView extends React.Component {
             onPress={this.cancel.bind(this)}
           >
             <Image
-              source={this.typeIcon}
+              source={this.cancelIcon}
             />
           </TouchableOpacity>
           <TouchableOpacity

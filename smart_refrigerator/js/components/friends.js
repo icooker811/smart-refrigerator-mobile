@@ -106,7 +106,7 @@ class FriendListContainerView extends Component {
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
-        ): ( <View>{ this.state.dataSize === 0?
+        ): ( <View style={styles.container}>{ this.state.dataSize === 0?
                     <View><Text style={styles.title}>ไม่พบรายการ</Text></View>: (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}

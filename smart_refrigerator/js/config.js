@@ -2,8 +2,9 @@ var config = {
   "development" : {
     "home_url": "https://smart-refrigerator-server.herokuapp.com/",
     "login_url": "https://smart-refrigerator-server.herokuapp.com/api-token-auth/",
-    "item_url": "https://smart-refrigerator-server.herokuapp.com/items/?me=true",
-    "friend_url": "https://smart-refrigerator-server.herokuapp.com/items/",
+    "my_item_url": "https://smart-refrigerator-server.herokuapp.com/items/?me=true",
+    "item_url": "https://smart-refrigerator-server.herokuapp.com/items/",
+    "friend_url": "https://smart-refrigerator-server.herokuapp.com/refrigerator/1/users/",
     "profile_url": "https://smart-refrigerator-server.herokuapp.com/me/",
   },
 }

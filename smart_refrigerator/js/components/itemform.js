@@ -65,11 +65,7 @@ class ItemFormView extends Component {
   }
 
   onBackPress() {
-    this.props.navigator.popToTop();
-    this.props.navigator.resetTo({
-      home: true,
-      user: null
-    });
+    this.props.navigator.pop();
   }
 
   onDonePress() {

@@ -101,6 +101,10 @@ export default class CameraView extends React.Component {
     });
   }
 
+  cancel() {
+    this.props.navigator.pop();
+  }
+
   get typeIcon() {
     let icon;
     const { back, front } = Camera.constants.Type;
@@ -170,7 +174,7 @@ export default class CameraView extends React.Component {
         <View style={[styles.overlay, styles.topOverlay]}>
           <TouchableOpacity
             style={styles.typeButton}
-            onPress={this.switchType}
+            onPress={this.cancel.bind(this)}
           >
             <Image
               source={this.typeIcon}

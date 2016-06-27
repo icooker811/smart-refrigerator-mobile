@@ -26,10 +26,12 @@ class ItemFormView extends Component {
     this.state = {
       selectingSectionKey: null,
       selectingRow: null,
+      loading: false,
     };
   }
 
   postData (goTo) {
+    this.setState({loading: true});
     var value = AsyncStorage.getItem('Authorization', (err, result) => {
       if (result !== null) {
         let data = new FormData()
@@ -57,8 +59,11 @@ class ItemFormView extends Component {
             } else {
               this.props.navigator.pop();
             }
+            this.setState({loading: false});
           })
-          .catch((error) => {})
+          .catch((error) => {
+            this.setState({loading: false});
+          })
           .done();
         }
     });
@@ -137,9 +142,12 @@ class ItemFormView extends Component {
           <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
         }
 
-        <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>เพิ่มของ</Text>
-        </TouchableHighlight>
+        { !this.state.loading? (
+            <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
+              <Text style={styles.buttonText}>เพิ่มของ</Text>
+            </TouchableHighlight>
+          ): <Text>รอสักครู่</Text>
+        }
 
       </View>
     );

@@ -33,6 +33,13 @@ var options = {
 
 class LoginFormView extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    };
+  }
+
   init() {
     var value = AsyncStorage.getItem('Authorization', (err, result) => {
       console.log(result);
@@ -51,7 +58,12 @@ class LoginFormView extends Component {
   }
 
   login(username, password) {
-    console.log(username, password);
+    // console.log(username, password);
+    console.log(this.state);
+
+    var state = this.state;
+    state.loading = true;
+    this.setState(state);
 
     fetch(config.development.login_url, {
       method: 'POST',
@@ -67,6 +79,8 @@ class LoginFormView extends Component {
       .then((responseData) => {
         if (typeof(responseData.token) === 'undefined') {
           Alert.alert('ผิดพลาด', 'คุณกรอกชื่อผู้ใช้หรือรหัสผ่านผิดพลาด กรุณาลองใหม่อีกครั้ง', [{text: 'OK'}]);
+          state.loading = false;
+          this.setState(state);
           return;
         }
 
@@ -77,15 +91,23 @@ class LoginFormView extends Component {
           });
         });
 
+        state.loading = false;
+        this.setState(state);
       })
       .catch((error) => {
         Alert.alert('ผิดพลาด', 'ไม่สามารถเข้าสู่ระบบได้ กรุณาลองใหม่อีกครั้ง', [{text: 'OK'}]);
+        state.loading = false;
+        this.setState(state);
       })
       .done();
   }
 
+  onChange(value) {
+      this.setState({value});
+  }
+
   onPress() {
-    dismissKeyboard()
+    dismissKeyboard();
     var value = this.refs.form.getValue();
     if (value !== null && value.username !== null && value.username !== '' &&
         value.password !== null && value.password !== '') {
@@ -101,10 +123,15 @@ class LoginFormView extends Component {
             ref="form"
             type={User}
             options={options}
+            value={this.state.value}
+            onChange={this.onChange.bind(this)}
           />
-          <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableHighlight>
+            { this.state.loading? (
+                <View><Text style={styles.title}>รอสักครู่...</Text></View>) : (
+                <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+                  <Text style={styles.buttonText}>เข้าสู่ระบบ</Text>
+                </TouchableHighlight>)
+            }
         </View>
       </View>
     );
@@ -122,6 +149,11 @@ var styles = StyleSheet.create({
     fontSize: 30,
     alignSelf: 'center',
     marginBottom: 30
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   },
   buttonText: {
     fontSize: 18,

@@ -51,7 +51,8 @@ class ItemListContainerView extends Component {
             this.setState({
               dataSize: items.length,
               dataSource: ds.cloneWithRows(items),
-              token: result
+              token: result,
+              loading: true,
             });
           })
           .catch((error) => {})

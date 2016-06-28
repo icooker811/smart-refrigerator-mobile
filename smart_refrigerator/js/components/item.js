@@ -38,7 +38,7 @@ class ItemView extends Component {
                 source={{uri: rowData.image}}
               />
             </View>
-            <TimeAgo time={rowData.expire_at} style={{ marginTop: 5, color: '#FB9014'}} />
+            <TimeAgo time={rowData.expire_at} style={{ margin: 5, marginBottom: 10, color: '#FB9014'}} />
           </View>
         </TouchableHighlight>
         <TouchableHighlight onPress={() => this.rowCancelPressed(rowData)} style={{ position: 'absolute', top: 10, right: 10 }} >
@@ -62,6 +62,7 @@ var styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   container: {
     flex: 1,
@@ -80,9 +81,6 @@ var styles = StyleSheet.create({
     height: 200,
   },
   item: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    flexDirection: 'row',
     width: (window.width / 2),
     position: 'relative',
   },

@@ -106,7 +106,6 @@ var TabBarExample = React.createClass({
            <TabNavigator>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_home.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_home_selected.png')} />}
               selected={this.state.selectedTab === 'itemTab'}
               onPress={() => {
                 this.setState({
@@ -117,7 +116,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_friends.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_friends_selected.png')} />}
               selected={this.state.selectedTab === 'friendTab'}
               onPress={() => {
                 this.setState({
@@ -128,7 +126,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_camera.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_camera_selected.png')} />}
               selected={this.state.selectedTab === 'cameraTab'}
               onPress={() => {
                 this.props.navigator.push({
@@ -139,7 +136,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_noti.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_noti_selected.png')} />}
               selected={this.state.selectedTab === 'notificationTab'}
               onPress={() => {
                 this.setState({
@@ -150,7 +146,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_profile.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_profile_selected.png')} />}
               selected={this.state.selectedTab === 'infoTab'}
               onPress={() => {
                 this.setState({

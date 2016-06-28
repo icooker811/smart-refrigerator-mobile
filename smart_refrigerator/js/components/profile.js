@@ -60,21 +60,23 @@ class ProfileView extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.containerContent}>
           <Header
             title={this.props.title}
             style={styles.header}
           />
-          {this.state.avatar_url?
-            <Image
-              style={styles.thumbnail}
-              source={{uri: this.state.avatar_url}}
-            />
-          : <View></View>}
-          <Text style={styles.title}>{this.state.display_name}</Text>
-          <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>ออกจากระบบ</Text>
-          </TouchableHighlight>
+          <View style={styles.container}>
+            {this.state.avatar_url?
+              <Image
+                style={styles.thumbnail}
+                source={{uri: this.state.avatar_url}}
+              />
+            : <View></View>}
+            <Text style={styles.title}>{this.state.display_name}</Text>
+            <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this)} underlayColor='#99d9f4'>
+              <Text style={styles.buttonText}>ออกจากระบบ</Text>
+            </TouchableHighlight>
+          </View>
       </View>
     );
   }
@@ -82,28 +84,25 @@ class ProfileView extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
     marginTop: 50,
-    padding: 20,
+    padding: 10,
     backgroundColor: '#ffffff',
   },
   title: {
-    fontSize: 30,
+    fontSize: 20,
     alignSelf: 'center',
-    marginBottom: 30
+    marginTop: 20,
+    marginBottom: 20
   },
   buttonText: {
     fontSize: 18,
-    color: 'white',
+    color: '#3AD4CD',
     alignSelf: 'center'
   },
   button: {
-    height: 36,
-    width: 200,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
+    height: 56,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 4,
     marginBottom: 10,
     alignSelf: 'center',
     justifyContent: 'center'
@@ -112,10 +111,12 @@ var styles = StyleSheet.create({
     backgroundColor: '#47BFBF',
   },
   thumbnail: {
-    width: 400,
-    height: 400,
+    width: 200,
+    height: 200,
     alignSelf: 'center',
-    marginTop: 10,
+  },
+  containerContent: {
+  
   },
 });
 

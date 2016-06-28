@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -23,6 +24,7 @@
 		424ACF89A4934E22924A3301 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4DA069A1A84D62A049341C /* libRCTCamera.a */; };
 		497BB61A1D21A828007BB52B /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 497BB6181D21A828007BB52B /* splash.png */; };
 		497BB61B1D21A828007BB52B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497BB6191D21A828007BB52B /* LaunchScreen.xib */; };
+		49A73C4A1D226516003E04B0 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A73C491D2264F9003E04B0 /* libRCTPushNotification.a */; };
 		49E18AEF1D1C19E900E4C034 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E18AEE1D1C19B600E4C034 /* libRCTSplashScreen.a */; };
 		6769F849AAC64DA88E8A4B49 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA781CEC1E8645A2BAAF64FB /* libRCTSplashScreen.a */; };
 		7D7F1ACFB9784D6EAB62A020 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6498207F0C4A7FA4137AF6 /* libsqlite3.0.tbd */; };
@@ -107,6 +109,13 @@
 			remoteGlobalIDString = E23D7B471ACEFE2A00C59171;
 			remoteInfo = SQLite;
 		};
+		49A73C481D2264F9003E04B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49A73C441D2264F9003E04B0 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
 		49E18ABA1D1A923900E4C034 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB6DAC475A3D4D1DAD752D68 /* RCTCamera.xcodeproj */;
@@ -167,6 +176,7 @@
 		46348CC35AD345C4897ADA32 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		497BB6181D21A828007BB52B /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen/SplashScreenResource/splash.png"; sourceTree = "<group>"; };
 		497BB6191D21A828007BB52B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen/SplashScreenResource/LaunchScreen.xib"; sourceTree = "<group>"; };
+		49A73C441D2264F9003E04B0 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		49E18AE91D1C19B500E4C034 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		6A6498207F0C4A7FA4137AF6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -204,6 +214,7 @@
 				6769F849AAC64DA88E8A4B49 /* libRCTSplashScreen.a in Frameworks */,
 				06929CB0916D48608DF27759 /* libSQLite.a in Frameworks */,
 				7D7F1ACFB9784D6EAB62A020 /* libsqlite3.0.tbd in Frameworks */,
+				49A73C4A1D226516003E04B0 /* libRCTPushNotification.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +333,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		49A73C451D2264F9003E04B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49A73C491D2264F9003E04B0 /* libRCTPushNotification.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		49E18AB61D1A923800E4C034 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,6 +376,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				49A73C441D2264F9003E04B0 /* RCTPushNotification.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -459,6 +479,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 8TGUR6GFA3;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -504,16 +525,20 @@
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = 49A73C451D2264F9003E04B0 /* Products */;
+					ProjectRef = 49A73C441D2264F9003E04B0 /* RCTPushNotification.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
 				{
-					ProductGroup = 49A73C141D2231AD003E04B0 /* Products */;
-					ProjectRef = 46348CC35AD345C4897ADA32 /* RCTSplashScreen.xcodeproj */;
-				},
-				{
 					ProductGroup = 49E18AEA1D1C19B500E4C034 /* Products */;
 					ProjectRef = 49E18AE91D1C19B500E4C034 /* RCTSplashScreen.xcodeproj */;
+				},
+				{
+					ProductGroup = 49A73C141D2231AD003E04B0 /* Products */;
+					ProjectRef = 46348CC35AD345C4897ADA32 /* RCTSplashScreen.xcodeproj */;
 				},
 				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
@@ -613,6 +638,13 @@
 			fileType = archive.ar;
 			path = libSQLite.a;
 			remoteRef = 49A73C271D2231AD003E04B0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		49A73C491D2264F9003E04B0 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 49A73C481D2264F9003E04B0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		49E18ABB1D1A923900E4C034 /* libRCTCamera.a */ = {
@@ -768,6 +800,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = smart_refrigerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -777,6 +810,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opendream.smart-refrigerator";
 				PRODUCT_NAME = smart_refrigerator;
+				PROVISIONING_PROFILE = "f9eceff5-c302-4cd1-90b1-0e6932bc9999";
 			};
 			name = Debug;
 		};
@@ -792,6 +826,7 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)/../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen",
 					"$(SRCROOT)/../node_modules/react-native-sqlite-storage/src/ios",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 				);
 				INFOPLIST_FILE = smart_refrigerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -801,6 +836,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opendream.smart-refrigerator";
 				PRODUCT_NAME = smart_refrigerator;
+				PROVISIONING_PROFILE = "f9eceff5-c302-4cd1-90b1-0e6932bc9999";
 			};
 			name = Release;
 		};

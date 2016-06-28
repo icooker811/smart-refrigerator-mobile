@@ -29,17 +29,8 @@ class ItemView extends Component {
   render() {
     var rowData = this.props.rowData;
     return (
-      <View>
-        <TouchableHighlight onPress={() => this.rowCancelPressed(rowData)}
-                            underlayColor='#dddddd'>
-          <View>
-            <Text style={styles.cancelText}>
-              {this.props.cancelText}
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <TouchableHighlight onPress={() => this.rowActionPressed(rowData)}
-                            underlayColor='#dddddd' style={styles.item}>
+      <View style={styles.item}>
+        <TouchableHighlight onPress={() => this.rowActionPressed(rowData)}>
           <View>
             <View style={styles.rowContainer}>
               <Image
@@ -47,11 +38,13 @@ class ItemView extends Component {
                 source={{uri: rowData.image}}
               />
             </View>
-            <Text style={styles.text}>
-              {rowData.created_by.display_name}
-            </Text>
-            <TimeAgo time={rowData.expire_at} />
+            <TimeAgo time={rowData.expire_at} style={{ marginTop: 5, color: '#FB9014'}} />
           </View>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => this.rowCancelPressed(rowData)} style={{ position: 'absolute', top: 10, right: 10 }} >
+          {this.props.cancelText === 'กินแล้ว'?
+          <Image source={require('../assets/ic_check.png')} />:
+          <Image source={require('../assets/ic_request.png')} />}
         </TouchableHighlight>
       </View>
     );
@@ -69,7 +62,6 @@ var styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    padding: 10
   },
   container: {
     flex: 1,
@@ -84,16 +76,19 @@ var styles = StyleSheet.create({
     backgroundColor: '#47BFBF',
   },
   thumbnail: {
-    width: 120,
-    height: 120,
+    width: 200,
+    height: 200,
   },
   item: {
+    borderWidth: 1,
+    borderColor: '#ccc',
     flexDirection: 'row',
-    margin: 10,
-    width: (window.width / 2) - 30
+    width: (window.width / 2),
+    position: 'relative',
   },
   cancelText: {
-    right: 0
+    right: 0,
+    position: 'absolute'
   }
 });
 

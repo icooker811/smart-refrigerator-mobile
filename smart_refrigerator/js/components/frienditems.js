@@ -107,10 +107,10 @@ class FriendItemListContainerView extends Component {
   rowPressed(data) {
     if (data) {
       Alert.alert(
-        'กินแล้ว?',
+        'ต้องการของชิ้นนี้ ?',
         '',
         [
-          {text: 'ไม่'},
+          {text: 'ยกเลิก'},
           {text: 'ใช่', onPress: () => this.getFromFriend(data)},
         ]
       );
@@ -120,8 +120,8 @@ class FriendItemListContainerView extends Component {
   renderRow(rowData, sectionID, rowID) {
     return (
       <Item rowData={rowData}
-            cancelText='กินแล้ว'
-            actionText='กินแล้ว'
+            cancelText='ขอกิน'
+            actionText='ขอกิน'
             rowActionPressed={this.rowPressed.bind(this)}
             rowCancelPressed={this.rowPressed.bind(this)}/>
     );
@@ -131,7 +131,7 @@ class FriendItemListContainerView extends Component {
     return (
       <View style={styles.content}>
         <Header
-          title={this.props.created_by.display_name}
+          title='Friend'
           style={styles.header}
           leftItem={{
             title: 'Back',
@@ -142,6 +142,12 @@ class FriendItemListContainerView extends Component {
             onPress: () => this.init(),
           }}
         />
+        <View style={styles.userWrapper} >
+          <Image source={require('../assets/ic_user.png')} />
+          <Text style={styles.textSpecial}>
+            { this.props.created_by.display_name }
+          </Text>
+        </View>
         {this.state.loading? (
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
@@ -157,6 +163,15 @@ class FriendItemListContainerView extends Component {
 };
 
 var styles = StyleSheet.create({
+  userWrapper: {
+    flexDirection: 'row',
+    margin: 5,
+    alignItems: 'center',
+  },
+  textSpecial: {
+    fontSize: 20,
+    padding: 5,
+  },
   separator: {
     height: 0,
     backgroundColor: '#dddddd'

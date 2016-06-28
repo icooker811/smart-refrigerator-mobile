@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "432550044797",
+    "project_id": "smart-refrigerator-1356"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432550044797:android:7d68ec57d8ad5acf",
+        "android_client_info": {
+          "package_name": "com.smart_refrigerator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJSWKTWrQsFFCQDwDj0d6XrsPVUoxu91I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

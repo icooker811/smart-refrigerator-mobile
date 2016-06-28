@@ -97,7 +97,7 @@ class FriendListContainerView extends Component {
               style={styles.thumbnail}
               source={{uri: rowData.avatar_url}}
             />
-            <Text style={styles.text}>
+            <Text style={styles.textSpecial}>
               {rowData.display_name}
             </Text>
           </View>
@@ -129,6 +129,10 @@ class FriendListContainerView extends Component {
 };
 
 var styles = StyleSheet.create({
+  textSpecial: {
+    fontSize: 20,
+    padding: 5,
+  },
   separator: {
     height: 1,
     backgroundColor: '#dddddd'
@@ -156,6 +160,7 @@ var styles = StyleSheet.create({
   thumbnail: {
     width: 53,
     height: 53,
+    marginRight: 10,
   }
 });
 

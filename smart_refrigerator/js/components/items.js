@@ -152,6 +152,9 @@ class ItemListContainerView extends Component {
             onPress: () => this.init(),
           }}
         />
+        <Text style={styles.textSpecial}>
+          ของเรา
+        </Text>
         {this.state.loading? (
           <View style={styles.container}>
             <Text style={styles.title}>รอสักครู่</Text>
@@ -167,6 +170,10 @@ class ItemListContainerView extends Component {
 };
 
 var styles = StyleSheet.create({
+  textSpecial: {
+    fontSize: 20,
+    padding: 5,
+  },
   logoWrapper: {
     position: 'absolute',
     top: 28,
@@ -198,7 +205,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    
+
   },
   thumbnail: {
     width: 53,

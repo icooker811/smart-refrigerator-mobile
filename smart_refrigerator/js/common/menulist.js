@@ -24,6 +24,41 @@ var ProfileView = require('../components/profile');
 var CameraView = require('../components/camera');
 var Header = require('../common/header');
 
+var PushNotification = require('react-native-push-notification');
+// PushNotification.configure({
+
+//     // (optional) Called when Token is generated (iOS and Android)
+//     onRegister: function(token) {
+//         console.log( 'TOKEN:', token );
+//     },
+
+//     // (required) Called when a remote or local notification is opened or received
+//     onNotification: function(notification) {
+//         console.log( 'NOTIFICATION:', notification );
+//     },
+
+//     // ANDROID ONLY: (optional) GCM Sender ID.
+//     senderID: "432550044797",
+
+//     // IOS ONLY (optional): default: all - Permissions to register.
+//     permissions: {
+//         alert: true,
+//         badge: true,
+//         sound: true
+//     },
+
+//     // Should the initial notification be popped automatically
+//     // default: true
+//     popInitialNotification: false,
+
+//     /**
+//       * IOS ONLY: (optional) default: true
+//       * - Specified if permissions will requested or not,
+//       * - if not, you must call PushNotificationsHandler.requestPermissions() later
+//       */
+//     requestPermissions: true,
+// });
+
 var TabBarExample = React.createClass({
   getInitialState: function() {
     return {
@@ -71,7 +106,6 @@ var TabBarExample = React.createClass({
            <TabNavigator>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_home.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_home_selected.png')} />}
               selected={this.state.selectedTab === 'itemTab'}
               onPress={() => {
                 this.setState({
@@ -82,7 +116,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_friends.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_friends_selected.png')} />}
               selected={this.state.selectedTab === 'friendTab'}
               onPress={() => {
                 this.setState({
@@ -93,7 +126,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_camera.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_camera_selected.png')} />}
               selected={this.state.selectedTab === 'cameraTab'}
               onPress={() => {
                 this.props.navigator.push({
@@ -104,7 +136,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_noti.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_noti_selected.png')} />}
               selected={this.state.selectedTab === 'notificationTab'}
               onPress={() => {
                 this.setState({
@@ -115,7 +146,6 @@ var TabBarExample = React.createClass({
             </TabNavigator.Item>
             <TabNavigator.Item
               renderIcon={() => <Image source={require('../assets/ic_profile.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_profile_selected.png')} />}
               selected={this.state.selectedTab === 'infoTab'}
               onPress={() => {
                 this.setState({

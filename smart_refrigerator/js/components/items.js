@@ -198,7 +198,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    
+
   },
   thumbnail: {
     width: 53,

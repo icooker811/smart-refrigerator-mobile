@@ -93,7 +93,8 @@ var styles = StyleSheet.create({
     width: (window.width / 2) - 30
   },
   cancelText: {
-    right: 0
+    right: 0,
+    position: 'absolute'
   }
 });
 

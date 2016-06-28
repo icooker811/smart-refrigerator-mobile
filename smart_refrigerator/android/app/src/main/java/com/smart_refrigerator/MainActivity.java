@@ -9,8 +9,11 @@ import com.remobile.splashscreen.*;
 
 import java.util.Arrays;
 import java.util.List;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+
 
 public class MainActivity extends ReactActivity {
+    private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -36,11 +39,12 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
+        mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
         return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
-            new RCTSplashScreenPackage(),
             new RCTCameraPackage(),
-            new RCTSplashScreenPackage(this)
+            new RCTSplashScreenPackage(this),
+            mReactNativePushNotificationPackage // <---- Add the Package
         );
     }
 }

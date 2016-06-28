@@ -12,10 +12,12 @@ import {
   Image,
   Text,
   TouchableHighlight,
+  Dimension,
 } from 'react-native';
 
 var Header = require('../common/header');
 var config = require('../config');
+var window = Dimensions.get('window');
 
 import { SegmentedControls } from 'react-native-radio-buttons';
 
@@ -149,9 +151,9 @@ class ItemFormView extends Component {
         }
 
         { !this.state.loading? (
-          <View style={{ bottom: 0 }}>
+          <View style={styles.btnWrapper} >
             <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>เพิ่มของ</Text>
+              <Image source={require('../assets/ic_capture.png')} />
             </TouchableHighlight>
           </View>
           ): <Text>รอสักครู่</Text>
@@ -169,35 +171,30 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 410,
+    width: window.width,
     height: 410,
   },
-  controlWrapper: {
-    backgroundColor: '#ECECEC',
-    width: 410,
+  btnWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    justifyContent: 'center',
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
+  button: { 
+    backgroundColor: '#fff',
+    borderRadius: 8,
     alignSelf: 'center'
   },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
   header: {
-    backgroundColor: '#47BFBF',
-    width: 410,
+    backgroundColor: '#fff',
+    width: window.width,
   },
   footer: {
     bottom: 0,
-    backgroundColor: '#47BFBF',
+    borderColor: '#ccc',
+    borderTopWidth: 1,
+    paddingVertical: 10,
+    width: window.width,
+    alignItems: 'center'
   }
 });
 

@@ -99,20 +99,23 @@ var styles = StyleSheet.create({
   },
   button: {
     height: 36,
+    width: 200,
     backgroundColor: '#48BBEC',
     borderColor: '#48BBEC',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
-    alignSelf: 'stretch',
+    alignSelf: 'center',
     justifyContent: 'center'
   },
   header: {
     backgroundColor: '#47BFBF',
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 400,
+    height: 400,
+    alignSelf: 'center',
+    marginTop: 10,
   },
 });
 

@@ -147,7 +147,7 @@ class ItemFormView extends Component {
 
 
         { this.state.selectedOption?
-          <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
+          <Text style={styles.textNoti}>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
         }
 
         { !this.state.loading? (
@@ -178,6 +178,9 @@ var styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     justifyContent: 'center',
+  },
+  textNoti: {
+    marginTop: 30,
   },
   button: { 
     backgroundColor: '#fff',

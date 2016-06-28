@@ -141,7 +141,6 @@ class ItemFormView extends Component {
            options={ options }
            onSelection={ this.setSelectedOption.bind(this) }
            selectedOption={this.state.selectedOption }
-           style={styles.controlWrapper}
          />
         </View>
 

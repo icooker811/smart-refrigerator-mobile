@@ -164,12 +164,16 @@ class NotificationListContainerView extends Component {
             />
 
             <View style={styles.rigthWrapper}>
+              { rowData.send_user.display_name !== 'system'? 
+                ( <Text style={styles.textName}>
+                    {rowData.send_user.display_name} 
+                  </Text>) : <View></View>
+              }
               <Text style={styles.text}>
                 {rowData.message} 
               </Text>
-              <Text style={styles.text}>
-                {rowData.send_user.display_name} 
-              </Text>
+
+
               {
                 rowData.notification_type === 'SHARE_NOW'? (
                   <TouchableHighlight onPress={this.onPress.bind(this, rowData)} style={styles.buttonRequest}>
@@ -301,6 +305,13 @@ var styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 0,
+  },
+  text: {
+    fontSize: 18,
+  },
+  textName: {
+    fontSize: 20,
+    marginBottom: 5,
   },
 });
 

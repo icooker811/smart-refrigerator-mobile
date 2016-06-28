@@ -166,7 +166,7 @@
 		0452C401CBE543AAAB611710 /* SQLite.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* smart_refrigerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smart_refrigerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Tooshare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tooshare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = smart_refrigerator/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = smart_refrigerator/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = smart_refrigerator/Images.xcassets; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* smart_refrigerator.app */,
+				13B07F961A680F5B00A75B9A /* Tooshare.app */,
 				00E356EE1AD99517003FC87E /* smart_refrigeratorTests.xctest */,
 			);
 			name = Products;
@@ -462,7 +462,7 @@
 			);
 			name = smart_refrigerator;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* smart_refrigerator.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Tooshare.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -809,7 +809,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opendream.smart-refrigerator";
-				PRODUCT_NAME = smart_refrigerator;
+				PRODUCT_NAME = Tooshare;
 				PROVISIONING_PROFILE = "f9eceff5-c302-4cd1-90b1-0e6932bc9999";
 			};
 			name = Debug;
@@ -835,7 +835,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.opendream.smart-refrigerator";
-				PRODUCT_NAME = smart_refrigerator;
+				PRODUCT_NAME = Tooshare;
 				PROVISIONING_PROFILE = "f9eceff5-c302-4cd1-90b1-0e6932bc9999";
 			};
 			name = Release;

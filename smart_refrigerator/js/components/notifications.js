@@ -9,9 +9,12 @@ import {
   TouchableHighlight,
   RecyclerViewBackedScrollView,
   ListView,
-  Image
+  Image,
+  Dimensions
 } from 'react-native';
 
+
+var window = Dimensions.get('window');
 var Header = require('../common/header');
 var SGListView = require('react-native-sglistview');
 var config = require('../config');
@@ -164,15 +167,18 @@ class NotificationListContainerView extends Component {
             />
 
             <View style={styles.rigthWrapper}>
-              { rowData.send_user.display_name !== 'system'? 
-                ( <Text style={styles.textName}>
-                    {rowData.send_user.display_name} 
-                  </Text>) : <View></View>
+              { rowData.send_user.display_name !== 'system'?
+                ( <View style={styles.userWrapper} >
+                  <Image  style={styles.icon} source={require('../assets/ic_user.png')} />
+                  <Text style={styles.textName}>
+                      {rowData.send_user.display_name}
+                  </Text>
+                </View>
+                ) : <View></View>
               }
               <Text style={styles.text}>
-                {rowData.message} 
+                {rowData.message}
               </Text>
-
 
               {
                 rowData.notification_type === 'SHARE_NOW'? (
@@ -204,7 +210,7 @@ class NotificationListContainerView extends Component {
               }
               <TimeAgo time={rowData.created_at} style={{ color: '#999', marginTop: 5 }} />
             </View>
-            
+
 
 
           </View>
@@ -270,7 +276,7 @@ var styles = StyleSheet.create({
     marginRight: 10,
   },
   rigthWrapper: {
-    width: 280,
+    width: window.width - 110,
   },
   buttonOrange: {
     alignItems: 'center',
@@ -303,7 +309,7 @@ var styles = StyleSheet.create({
   },
   buttonRequest: {
     position: 'absolute',
-    right: 0,
+    right: 15,
     top: 0,
   },
   text: {
@@ -312,7 +318,17 @@ var styles = StyleSheet.create({
   textName: {
     fontSize: 20,
     marginBottom: 5,
+    marginLeft: 10
   },
+  userWrapper: {
+    flexDirection: 'row',
+    margin: 2,
+    alignItems: 'center',
+  },
+  icon: {
+    width: 15,
+    height: 20,
+  }
 });
 
 module.exports = NotificationListContainerView;

@@ -100,6 +100,9 @@ class FriendListContainerView extends Component {
             <Text style={styles.textSpecial}>
               {rowData.display_name}
             </Text>
+            <Text style={styles.text}>
+              จำนวน {rowData.item_count} ชิ้น
+            </Text>
           </View>
           <View style={styles.separator}/>
         </View>
@@ -130,6 +133,7 @@ class FriendListContainerView extends Component {
 
 var styles = StyleSheet.create({
   textSpecial: {
+    flex: 1,
     fontSize: 20,
     padding: 5,
   },
@@ -161,6 +165,14 @@ var styles = StyleSheet.create({
     width: 53,
     height: 53,
     marginRight: 10,
+  },
+  text: {
+    flex: 1,
+    color: '#ccc',
+    fontSize: 14,
+    padding: 5,
+    position: 'absolute',
+    right: 5
   }
 });
 

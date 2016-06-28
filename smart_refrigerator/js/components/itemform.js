@@ -12,7 +12,6 @@ import {
   Image,
   Text,
   TouchableHighlight,
-  Dimension,
 } from 'react-native';
 
 var Header = require('../common/header');
@@ -136,8 +135,20 @@ class ItemFormView extends Component {
         <Image source={{ uri: this.props.data.path }}
                style={styles.image}/>
 
-        <View style={{marginTop: 10, backgroundColor: '#EBEBEB'}}>
+        <View style={{marginTop: 10}}>
          <SegmentedControls
+           tint= {'#f80046'}
+            selectedTint= {'white'}
+            backTint= {'#1e2126'}
+            optionStyle= {{
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}
+            containerStyle= {{
+              width: window.width - 20,
+              marginLeft: 20,
+              marginRight: 20,
+            }}
            options={ options }
            onSelection={ this.setSelectedOption.bind(this) }
            selectedOption={this.state.selectedOption }
@@ -181,7 +192,7 @@ var styles = StyleSheet.create({
   textNoti: {
     marginTop: 30,
   },
-  button: { 
+  button: {
     backgroundColor: '#fff',
     borderRadius: 8,
     alignSelf: 'center'

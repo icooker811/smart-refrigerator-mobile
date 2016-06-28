@@ -165,12 +165,12 @@ class FriendItemListContainerView extends Component {
 var styles = StyleSheet.create({
   userWrapper: {
     flexDirection: 'row',
-    margin: 5,
+    margin: 10,
     alignItems: 'center',
   },
   textSpecial: {
     fontSize: 20,
-    padding: 5,
+    padding: 15,
   },
   separator: {
     height: 0,

@@ -12,10 +12,12 @@ import {
   Image,
   Text,
   TouchableHighlight,
+  Dimension,
 } from 'react-native';
 
 var Header = require('../common/header');
 var config = require('../config');
+var window = Dimensions.get('window');
 
 import { SegmentedControls } from 'react-native-radio-buttons';
 
@@ -134,20 +136,26 @@ class ItemFormView extends Component {
         <Image source={{ uri: this.props.data.path }}
                style={styles.image}/>
 
+        <View style={{marginTop: 10, backgroundColor: '#EBEBEB'}}>
          <SegmentedControls
            options={ options }
            onSelection={ this.setSelectedOption.bind(this) }
            selectedOption={this.state.selectedOption }
+           style={styles.controlWrapper}
          />
+        </View>
+
 
         { this.state.selectedOption?
           <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
         }
 
         { !this.state.loading? (
+          <View style={styles.btnWrapper} >
             <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>เพิ่มของ</Text>
+              <Image source={require('../assets/ic_capture.png')} />
             </TouchableHighlight>
+          </View>
           ): <Text>รอสักครู่</Text>
         }
 
@@ -159,32 +167,34 @@ class ItemFormView extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   image: {
-    width: 400,
-    height: 400
+    width: window.width,
+    height: 410,
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
+  btnWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    justifyContent: 'center',
+  },
+  button: { 
+    backgroundColor: '#fff',
+    borderRadius: 8,
     alignSelf: 'center'
   },
-  button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
   header: {
-    backgroundColor: '#47BFBF',
+    backgroundColor: '#fff',
+    width: window.width,
   },
   footer: {
     bottom: 0,
-    backgroundColor: '#47BFBF',
+    borderColor: '#ccc',
+    borderTopWidth: 1,
+    paddingVertical: 10,
+    width: window.width,
+    alignItems: 'center'
   }
 });
 

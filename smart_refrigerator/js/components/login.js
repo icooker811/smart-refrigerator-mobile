@@ -9,7 +9,9 @@ import {
   AsyncStorage,
   Text,
   View,
+  Image,
   TouchableHighlight,
+  Dimensions,
 } from 'react-native';
 
 var Header = require('../common/header');
@@ -17,6 +19,7 @@ var dismissKeyboard = require('react-native-dismiss-keyboard');
 
 var StyleSheet = require('StyleSheet');
 var Form = t.form.Form;
+var window = Dimensions.get('window');
 
 var User = t.struct({
   username: t.String,
@@ -24,8 +27,13 @@ var User = t.struct({
 });
 
 var options = {
+  auto: 'placeholders',
   fields: {
+    username: {
+      placeholderTextColor: '#fff',
+    },
     password: {
+      placeholderTextColor: '#fff',
       secureTextEntry: true
     }
   }
@@ -117,8 +125,9 @@ class LoginFormView extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.container}>
+      <View style={styles.containerContent}>
+        <Image source={require('../assets/bg_login.png')}  style={styles.backgroundImage} />
+        <View style={styles.container}> 
           <Form
             ref="form"
             type={User}
@@ -139,11 +148,13 @@ class LoginFormView extends Component {
 }
 
 var styles = StyleSheet.create({
-  container: {
+  containerContent: {
     justifyContent: 'center',
-    marginTop: 50,
-    padding: 20,
-    backgroundColor: '#ffffff',
+  },
+  container: {
+    marginTop: 290,
+    width: window.width-100,
+    alignSelf: 'center',
   },
   title: {
     fontSize: 30,
@@ -152,15 +163,13 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: 'white',
+    color: '#3AD4CD',
     alignSelf: 'center'
   },
   button: {
-    height: 36,
-    backgroundColor: '#48BBEC',
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
+    height: 56,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 4,
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
@@ -168,6 +177,11 @@ var styles = StyleSheet.create({
   header: {
     backgroundColor: '#999999',
     height: 60
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    position: 'absolute',
   }
 });
 

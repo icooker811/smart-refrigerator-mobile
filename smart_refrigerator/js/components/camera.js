@@ -124,9 +124,9 @@ export default class CameraView extends React.Component {
     const { back, front } = Camera.constants.Type;
 
     if (this.state.camera.type === back) {
-      icon = require('../assets/ic_camera_rear_white.png');
+      icon = require('../assets/ic_close.png');
     } else if (this.state.camera.type === front) {
-      icon = require('../assets/ic_camera_front_white.png');
+      icon = require('../assets/ic_close.png');
     }
 
     return icon;

@@ -105,18 +105,19 @@ var TabBarExample = React.createClass({
     return (
            <TabNavigator>
             <TabNavigator.Item
-              title="Item"
-              icon={{uri: base64Icon, scale: 3}}
+              renderIcon={() => <Image source={require('../assets/ic_home.png')} />}
+              renderSelectedIcon={() => <Image source={require('../assets/ic_home_selected.png')} />}
               selected={this.state.selectedTab === 'itemTab'}
               onPress={() => {
                 this.setState({
                   selectedTab: 'itemTab',
                 });
               }}>
-              <ItemsContainerView title='Item List' navigator={navigator} />
+              <ItemsContainerView title='' navigator={navigator} />
             </TabNavigator.Item>
             <TabNavigator.Item
-              title="Friend"
+              renderIcon={() => <Image source={require('../assets/ic_friends.png')} />}
+              renderSelectedIcon={() => <Image source={require('../assets/ic_friends_selected.png')} />}
               selected={this.state.selectedTab === 'friendTab'}
               onPress={() => {
                 this.setState({
@@ -126,9 +127,8 @@ var TabBarExample = React.createClass({
               <FriendListContainerView title='Friend List' navigator={navigator} />
             </TabNavigator.Item>
             <TabNavigator.Item
-              title="Camera"
-              renderIcon={() => <Image source={require('../assets/ic_camera_front_white.png')} />}
-              renderSelectedIcon={() => <Image source={require('../assets/ic_camera_rear_white.png')} />}
+              renderIcon={() => <Image source={require('../assets/ic_camera.png')} />}
+              renderSelectedIcon={() => <Image source={require('../assets/ic_camera_selected.png')} />}
               selected={this.state.selectedTab === 'cameraTab'}
               onPress={() => {
                 this.props.navigator.push({
@@ -138,7 +138,8 @@ var TabBarExample = React.createClass({
               <Text></Text>
             </TabNavigator.Item>
             <TabNavigator.Item
-              title="Notification"
+              renderIcon={() => <Image source={require('../assets/ic_noti.png')} />}
+              renderSelectedIcon={() => <Image source={require('../assets/ic_noti_selected.png')} />}
               selected={this.state.selectedTab === 'notificationTab'}
               onPress={() => {
                 this.setState({
@@ -148,7 +149,8 @@ var TabBarExample = React.createClass({
               <NotificationListContainerView title='Notification List' navigator={navigator} />
             </TabNavigator.Item>
             <TabNavigator.Item
-              title="Profile"
+              renderIcon={() => <Image source={require('../assets/ic_profile.png')} />}
+              renderSelectedIcon={() => <Image source={require('../assets/ic_profile_selected.png')} />}
               selected={this.state.selectedTab === 'infoTab'}
               onPress={() => {
                 this.setState({

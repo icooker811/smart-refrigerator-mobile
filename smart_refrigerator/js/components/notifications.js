@@ -162,37 +162,40 @@ class NotificationListContainerView extends Component {
               style={styles.thumbnail}
               source={{uri: rowData.item.image}}
             />
-            <Text style={styles.text}>
-              {rowData.message} |
-            </Text>
 
-            <Text style={styles.text}>
-              {rowData.send_user.display_name} |
-            </Text>
-
-            {
-              rowData.notification_type === 'SHARE_NOW'? (
-                <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, rowData)} underlayColor='#99d9f4'>
-                  <Text style={styles.buttonText}>ขอนะ</Text>
-                </TouchableHighlight>
-              ): (<View></View>)
-
-            }
-
-            {
-              rowData.notification_type === 'EXPIRE_NOW'? (
-                <View>
-                  <TouchableHighlight style={styles.button} onPress={this.rowCancelPressed.bind(this, rowData)} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>กินแล้ว</Text>
+            <View style={styles.rigthWrapper}>
+              <Text style={styles.text}>
+                {rowData.message} |
+              </Text>
+              <Text style={styles.text}>
+                {rowData.send_user.display_name} |
+              </Text>
+              {
+                rowData.notification_type === 'SHARE_NOW'? (
+                  <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, rowData)} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>ขอนะ</Text>
                   </TouchableHighlight>
-                  <TouchableHighlight style={styles.button} onPress={this.rowSharePressed.bind(this, rowData)} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>แชร์เพื่อน</Text>
-                  </TouchableHighlight>
-                  </View>
-              ): (<View></View>)
+                ): (<View></View>)
 
-            }
-            <TimeAgo time={rowData.created_at} />
+              }
+
+              {
+                rowData.notification_type === 'EXPIRE_NOW'? (
+                  <View>
+                    <TouchableHighlight style={styles.buttonOrange} onPress={this.rowCancelPressed.bind(this, rowData)} underlayColor='#99d9f4'>
+                      <Text style={styles.buttonText}>กินแล้ว</Text>
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.buttonGrey} onPress={this.rowSharePressed.bind(this, rowData)} underlayColor='#99d9f4'>
+                      <Text style={styles.buttonText}>แชร์เพื่อน</Text>
+                    </TouchableHighlight>
+                    </View>
+                ): (<View></View>)
+
+              }
+              <TimeAgo time={rowData.created_at} />
+            </View>
+            
+
 
           </View>
           <View style={styles.separator}/>
@@ -252,8 +255,8 @@ var styles = StyleSheet.create({
     backgroundColor: '#47BFBF',
   },
   thumbnail: {
-    width: 53,
-    height: 81,
+    width: 100,
+    height: 100,
   },
   buttonText: {
     fontSize: 18,
@@ -269,6 +272,9 @@ var styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'stretch',
     justifyContent: 'center'
+  },
+  buttonOrange: {
+    
   },
 });
 

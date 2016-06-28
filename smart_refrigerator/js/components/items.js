@@ -141,6 +141,9 @@ class ItemListContainerView extends Component {
   render() {
     return (
       <View style={styles.content}>
+        <View style={styles.logoWrapper}>
+          <Image source={require('../assets/logo.png')} />
+        </View>
         <Header
           title={this.props.title}
           style={styles.header}
@@ -154,7 +157,7 @@ class ItemListContainerView extends Component {
             <Text style={styles.title}>รอสักครู่</Text>
           </View>
         ): ( <View style={styles.container}>{ this.state.dataSize === 0?
-                    <Text style={styles.title}>คลิกเพิ่มของ</Text>: (
+        (<Image source={require('../assets/bg_home.png')}  style={styles.backgroundImage} />): (
                     <SGListView dataSource={this.state.dataSource}
                        renderRow={this.renderRow.bind(this)}
                        contentContainerStyle={styles.list}
@@ -164,6 +167,15 @@ class ItemListContainerView extends Component {
 };
 
 var styles = StyleSheet.create({
+  logoWrapper: {
+    position: 'absolute',
+    top: 28,
+    width: window.width,
+    alignItems: 'center'
+  },
+  logo: {
+
+  },
   separator: {
     height: 0,
     backgroundColor: '#dddddd'
@@ -186,7 +198,7 @@ var styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    backgroundColor: '#47BFBF',
+    
   },
   thumbnail: {
     width: 53,

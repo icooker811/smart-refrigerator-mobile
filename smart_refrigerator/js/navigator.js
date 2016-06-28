@@ -106,7 +106,7 @@ var _Navigator = React.createClass({
     if (route.items) {
       return (
         <ItemsContainerView
-          title='Item List'
+          title='Tooshare'
           navigator={navigator}
         />
       );

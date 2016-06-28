@@ -155,7 +155,7 @@ var styles = StyleSheet.create({
   },
   thumbnail: {
     width: 53,
-    height: 81,
+    height: 53,
   }
 });
 

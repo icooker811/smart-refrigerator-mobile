@@ -134,20 +134,26 @@ class ItemFormView extends Component {
         <Image source={{ uri: this.props.data.path }}
                style={styles.image}/>
 
+        <View style={{marginTop: 10, backgroundColor: '#EBEBEB'}}>
          <SegmentedControls
            options={ options }
            onSelection={ this.setSelectedOption.bind(this) }
            selectedOption={this.state.selectedOption }
+           style={styles.controlWrapper}
          />
+        </View>
+
 
         { this.state.selectedOption?
           <Text>แจ้งเตือนอีก: {this.state.selectedOption}ข้างหน้า</Text>: <Text></Text>
         }
 
         { !this.state.loading? (
+          <View style={{ bottom: 0 }}>
             <TouchableHighlight style={styles.footer} onPress={this.onNextPress.bind(this)} underlayColor='#99d9f4'>
               <Text style={styles.buttonText}>เพิ่มของ</Text>
             </TouchableHighlight>
+          </View>
           ): <Text>รอสักครู่</Text>
         }
 
@@ -159,10 +165,16 @@ class ItemFormView extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   image: {
-    width: 400,
-    height: 400
+    width: 410,
+    height: 410,
+  },
+  controlWrapper: {
+    backgroundColor: '#ECECEC',
+    width: 410,
   },
   buttonText: {
     fontSize: 18,
@@ -181,6 +193,7 @@ var styles = StyleSheet.create({
   },
   header: {
     backgroundColor: '#47BFBF',
+    width: 410,
   },
   footer: {
     bottom: 0,

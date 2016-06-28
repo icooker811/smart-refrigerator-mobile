@@ -1,12 +1,12 @@
 var config = {
   "development" : {
-    "home_url": "https://smart-refrigerator-server.herokuapp.com/",
-    "login_url": "https://smart-refrigerator-server.herokuapp.com/api-token-auth/",
-    "my_item_url": "https://smart-refrigerator-server.herokuapp.com/items/?me=true",
-    "item_url": "https://smart-refrigerator-server.herokuapp.com/items/",
-    "friend_url": "https://smart-refrigerator-server.herokuapp.com/refrigerators/1/users/",
-    "notification_url": "https://smart-refrigerator-server.herokuapp.com/notifications/",
-    "profile_url": "https://smart-refrigerator-server.herokuapp.com/me/",
+    "home_url": "http://10.0.3.24:8009/",
+    "login_url": "http://10.0.3.24:8009/api-token-auth/",
+    "my_item_url": "http://10.0.3.24:8009/items/?me=true",
+    "item_url": "http://10.0.3.24:8009/items/",
+    "friend_url": "http://10.0.3.24:8009/refrigerators/1/users/",
+    "notification_url": "http://10.0.3.24:8009/notifications/",
+    "profile_url": "http://10.0.3.24:8009/me/",
   },
 }
 module.exports = config;

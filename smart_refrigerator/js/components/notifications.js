@@ -98,6 +98,61 @@ class NotificationListContainerView extends Component {
     }
   }
 
+  liftOff(data) {
+    fetch(config.development.item_url + data.id + '/lift_off/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
+
+  shareNow(data) {
+    fetch(config.development.item_url + data.id + '/share_now/', {
+      method: 'POST',
+      headers: {
+        'Authorization': this.state.token,
+      }
+    }).then((response) => response.json())
+      .then((responseData) => {
+        this.init();
+      })
+      .catch((error) => {})
+      .done();
+  }
+
+  rowSharePressed(data) {
+    if (data) {
+      Alert.alert(
+        'คุณต้องการแชร์ของให้เพื่อน?',
+        '',
+        [
+          {text: 'ไม่'},
+          {text: 'ใช่', onPress: () => this.shareNow(data.item)},
+        ]
+      );
+    }
+  }
+
+
+  rowCancelPressed(data) {
+    if (data) {
+      Alert.alert(
+        'กินแล้ว?',
+        '',
+        [
+          {text: 'ไม่'},
+          {text: 'ใช่', onPress: () => this.liftOff(data.item)},
+        ]
+      );
+    }
+  }
+
   renderRow(rowData, sectionID, rowID) {
     return (
       <TouchableHighlight underlayColor='#dddddd'>
@@ -124,6 +179,19 @@ class NotificationListContainerView extends Component {
 
             }
 
+            {
+              rowData.notification_type === 'EXPIRE_NOW'? (
+                <View>
+                  <TouchableHighlight style={styles.button} onPress={this.rowCancelPressed.bind(this, rowData)} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>กินแล้ว</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight style={styles.button} onPress={this.rowSharePressed.bind(this, rowData)} underlayColor='#99d9f4'>
+                    <Text style={styles.buttonText}>แชร์เพื่อน</Text>
+                  </TouchableHighlight>
+                  </View>
+              ): (<View></View>)
+
+            }
             <TimeAgo time={rowData.created_at} />
 
           </View>
@@ -139,6 +207,10 @@ class NotificationListContainerView extends Component {
         <Header
           title={this.props.title}
           style={styles.header}
+          rightItem={{
+            title: 'Refresh',
+            onPress: () => this.init(),
+          }}
         />
         {this.state.loading? (
           <View style={styles.container}>

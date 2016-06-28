@@ -15,6 +15,7 @@ import {
 
 var Header = require('../common/header');
 var Item = require('../components/item');
+
 var SGListView = require('react-native-sglistview');
 var config = require('../config');
 
@@ -143,6 +144,10 @@ class ItemListContainerView extends Component {
         <Header
           title={this.props.title}
           style={styles.header}
+          rightItem={{
+            title: 'Refresh',
+            onPress: () => this.init(),
+          }}
         />
         {this.state.loading? (
           <View style={styles.container}>

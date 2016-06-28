@@ -19,6 +19,8 @@ var config = require('../config');
 
 import { SegmentedControls } from 'react-native-radio-buttons';
 
+var PushNotification = require('react-native-push-notification');
+
 class ItemFormView extends Component {
 
   constructor(props) {

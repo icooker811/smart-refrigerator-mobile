@@ -137,6 +137,10 @@ class FriendItemListContainerView extends Component {
             title: 'Back',
             onPress: () => this.onBackPress(),
           }}
+          rightItem={{
+            title: 'Refresh',
+            onPress: () => this.init(),
+          }}
         />
         {this.state.loading? (
           <View style={styles.container}>

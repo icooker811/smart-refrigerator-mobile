@@ -22,9 +22,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		424ACF89A4934E22924A3301 /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4DA069A1A84D62A049341C /* libRCTCamera.a */; };
-		497BB61A1D21A828007BB52B /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 497BB6181D21A828007BB52B /* splash.png */; };
 		497BB61B1D21A828007BB52B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497BB6191D21A828007BB52B /* LaunchScreen.xib */; };
 		49A73C4A1D226516003E04B0 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49A73C491D2264F9003E04B0 /* libRCTPushNotification.a */; };
+		49A73C4C1D22C607003E04B0 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A73C4B1D22C607003E04B0 /* splash.png */; };
 		49E18AEF1D1C19E900E4C034 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E18AEE1D1C19B600E4C034 /* libRCTSplashScreen.a */; };
 		6769F849AAC64DA88E8A4B49 /* libRCTSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA781CEC1E8645A2BAAF64FB /* libRCTSplashScreen.a */; };
 		7D7F1ACFB9784D6EAB62A020 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A6498207F0C4A7FA4137AF6 /* libsqlite3.0.tbd */; };
@@ -174,9 +174,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = smart_refrigerator/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		46348CC35AD345C4897ADA32 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
-		497BB6181D21A828007BB52B /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen/SplashScreenResource/splash.png"; sourceTree = "<group>"; };
 		497BB6191D21A828007BB52B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen/SplashScreenResource/LaunchScreen.xib"; sourceTree = "<group>"; };
 		49A73C441D2264F9003E04B0 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		49A73C4B1D22C607003E04B0 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash.png; path = smart_refrigerator/splash.png; sourceTree = "<group>"; };
 		49E18AE91D1C19B500E4C034 /* RCTSplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSplashScreen.xcodeproj; path = "../node_modules/@remobile/react-native-splashscreen/ios/RCTSplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		6A6498207F0C4A7FA4137AF6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 		13B07FAE1A68108700A75B9A /* smart_refrigerator */ = {
 			isa = PBXGroup;
 			children = (
-				497BB6181D21A828007BB52B /* splash.png */,
+				49A73C4B1D22C607003E04B0 /* splash.png */,
 				497BB6191D21A828007BB52B /* LaunchScreen.xib */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -689,8 +689,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				497BB61A1D21A828007BB52B /* splash.png in Resources */,
 				497BB61B1D21A828007BB52B /* LaunchScreen.xib in Resources */,
+				49A73C4C1D22C607003E04B0 /* splash.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -165,34 +165,40 @@ class NotificationListContainerView extends Component {
 
             <View style={styles.rigthWrapper}>
               <Text style={styles.text}>
-                {rowData.message} |
+                {rowData.message} 
               </Text>
               <Text style={styles.text}>
-                {rowData.send_user.display_name} |
+                {rowData.send_user.display_name} 
               </Text>
               {
                 rowData.notification_type === 'SHARE_NOW'? (
-                  <TouchableHighlight style={styles.button} onPress={this.onPress.bind(this, rowData)} underlayColor='#99d9f4'>
-                    <Text style={styles.buttonText}>ขอนะ</Text>
+                  <TouchableHighlight onPress={this.onPress.bind(this, rowData)} style={styles.buttonRequest}>
+                    <Image source={require('../assets/ic_request.png')} />
                   </TouchableHighlight>
+
                 ): (<View></View>)
 
               }
 
               {
                 rowData.notification_type === 'EXPIRE_NOW'? (
-                  <View>
-                    <TouchableHighlight style={styles.buttonOrange} onPress={this.rowCancelPressed.bind(this, rowData)} underlayColor='#99d9f4'>
-                      <Text style={styles.buttonText}>กินแล้ว</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.buttonGrey} onPress={this.rowSharePressed.bind(this, rowData)} underlayColor='#99d9f4'>
-                      <Text style={styles.buttonText}>แชร์เพื่อน</Text>
-                    </TouchableHighlight>
+                  <View style={styles.btnWrapper}>
+                    <View>
+                      <TouchableHighlight style={styles.buttonOrange} onPress={this.rowCancelPressed.bind(this, rowData)}>
+                        <Text style={{ color: '#fff'}}>กินแล้ว</Text>
+                      </TouchableHighlight>
                     </View>
+
+                    <View>
+                      <TouchableHighlight style={styles.buttonGrey} onPress={this.rowSharePressed.bind(this, rowData)}>
+                        <Text style={{ color: '#333'}}>แชร์เพื่อน</Text>
+                      </TouchableHighlight>
+                    </View>
+                </View>
                 ): (<View></View>)
 
               }
-              <TimeAgo time={rowData.created_at} />
+              <TimeAgo time={rowData.created_at} style={{ color: '#999', marginTop: 5 }} />
             </View>
             
 
@@ -257,11 +263,25 @@ var styles = StyleSheet.create({
   thumbnail: {
     width: 100,
     height: 100,
+    marginRight: 10,
   },
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
+  rigthWrapper: {
+    width: 280,
+  },
+  buttonOrange: {
+    alignItems: 'center',
+    backgroundColor: '#F58E27',
+    padding: 5,
+    borderRadius: 3,
+    width: 100,
+    marginRight: 10,
+  },
+  buttonGrey: {
+    alignItems: 'center',
+    backgroundColor: '#ECECEC',
+    padding: 5,
+    borderRadius: 3,
+    width: 100,
   },
   button: {
     height: 36,
@@ -273,8 +293,14 @@ var styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
-  buttonOrange: {
-    
+  btnWrapper: {
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  buttonRequest: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
   },
 });
 
